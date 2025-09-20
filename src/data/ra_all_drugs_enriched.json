@@ -1,0 +1,1032 @@
+{
+  "originators": [
+    {
+      "originator_generic": "Adalimumab",
+      "originator_brand": "Humira",
+      "dmard_class": "bDMARD (TNFi)",
+      "moa": "Monoclonal antibody against TNF-\u03b1",
+      "route": "SC",
+      "regimen": "40 mg every other week (consider weekly if needed)",
+      "starting_dose": "40",
+      "maintenance_dose": "40",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/125057s417lbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_TB": "Y",
+        "Warn_HBV": "Y",
+        "Warn_Malignancy": "Y",
+        "Warn_Hypersensitivity": "Y",
+        "Warn_Immunogenicity": "Y"
+      },
+      "contraindications": {
+        "Contra_Active_Serious_Infection": "Y",
+        "Contra_Latent_or_Active_TB": "Y",
+        "Contra_Moderate_to_Severe_HF": "Y",
+        "Contra_Demyelinating_Disease": "Y"
+      },
+      "biosimilars": [
+        {
+          "biosimilar_generic": "adalimumab-atto",
+          "biosimilar_brand": "Amjevita",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": "40",
+          "maintenance_dose": "40",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/761024Orig1s011lbl.pdf",
+          "notes": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "adalimumab-adbm",
+          "biosimilar_brand": "Cyltezo (interchangeable)",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": "40",
+          "maintenance_dose": "40",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761058s031lbl.pdf",
+          "notes": "Same dosing as Humira; consider weekly if not on MTX and inadequate response.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "adalimumab-adaz",
+          "biosimilar_brand": "Hyrimoz",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": "40",
+          "maintenance_dose": "40",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/761071s000lbl.pdf",
+          "notes": "Humira-equivalent dosing; citrate-free versions may differ in injection volume.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "adalimumab-bwwd",
+          "biosimilar_brand": "Hadlima",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": "40",
+          "maintenance_dose": "40",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761059s004lbl.pdf",
+          "notes": "Humira-equivalent dosing; check device/volume differences.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "adalimumab-afzb",
+          "biosimilar_brand": "Abrilada",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": "40",
+          "maintenance_dose": "40",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/761118s000lbl.pdf",
+          "notes": "Humira-equivalent dosing; weekly possible if not on MTX and response inadequate.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "adalimumab-fkjp",
+          "biosimilar_brand": "Hulio",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": "40",
+          "maintenance_dose": "40",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/761154s005lbl.pdf",
+          "notes": "Humira-equivalent dosing; weekly alternative noted in some labels.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "adalimumab-aqvh",
+          "biosimilar_brand": "Yusimry",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": "40",
+          "maintenance_dose": "40",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761216s000lbl.pdf",
+          "notes": "Humira-equivalent dosing; check device/volume options.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "adalimumab-aaty",
+          "biosimilar_brand": "Yuflyma",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": "40",
+          "maintenance_dose": "40",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761216s000lbl.pdf",
+          "notes": "Humira-equivalent dosing; check device/volume options.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        }
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 8
+    },
+    {
+      "originator_generic": "Etanercept",
+      "originator_brand": "Enbrel",
+      "dmard_class": "bDMARD (TNFi)",
+      "moa": "TNF receptor (p75)-Fc fusion protein binding TNF-\u03b1",
+      "route": "SC",
+      "regimen": "50 mg once weekly or 25 mg twice weekly",
+      "starting_dose": "50",
+      "maintenance_dose": "50",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/103795s5597s5598s5599lbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_TB": "Y",
+        "Warn_HBV": "Y",
+        "Warn_Malignancy": "Y",
+        "Warn_Hypersensitivity": "Y",
+        "Warn_Immunogenicity": "Y"
+      },
+      "contraindications": {
+        "Contra_Active_Serious_Infection": "Y",
+        "Contra_Latent_or_Active_TB": "Y",
+        "Contra_Moderate_to_Severe_HF": "Y",
+        "Contra_Demyelinating_Disease": "Y"
+      },
+      "biosimilars": [
+        {
+          "biosimilar_generic": "etanercept-szzs",
+          "biosimilar_brand": "Erelzi",
+          "route": "SC",
+          "regimen": "Weekly",
+          "starting_dose": "50",
+          "maintenance_dose": "50",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2020/761042s012lbl.pdf",
+          "notes": "Doses >50 mg/week not recommended for RA.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "etanercept-ykro",
+          "biosimilar_brand": "Eticovo",
+          "route": "SC",
+          "regimen": "Weekly",
+          "starting_dose": "50",
+          "maintenance_dose": "50",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/761066s000lbl.pdf",
+          "notes": "Doses >50 mg/week not recommended for RA.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y"
+          }
+        }
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 2
+    },
+    {
+      "originator_generic": "Infliximab",
+      "originator_brand": "Remicade",
+      "dmard_class": "bDMARD (TNFi)",
+      "moa": "Chimeric monoclonal antibody against TNF-\u03b1",
+      "route": "IV",
+      "regimen": "3 mg/kg at 0, 2, 6 weeks; then Q8W (may escalate)",
+      "starting_dose": "3",
+      "maintenance_dose": "3",
+      "dose_units": "mg/kg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2020/103772s5389s5391s5394lbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_TB": "Y",
+        "Warn_HBV": "Y",
+        "Warn_Malignancy": "Y",
+        "Warn_Hepatic": "Y",
+        "Warn_Hypersensitivity": "Y",
+        "Warn_Immunogenicity": "Y"
+      },
+      "contraindications": {
+        "Contra_Active_Serious_Infection": "Y",
+        "Contra_Latent_or_Active_TB": "Y",
+        "Contra_Moderate_to_Severe_HF": "Y",
+        "Contra_Demyelinating_Disease": "Y"
+      },
+      "biosimilars": [
+        {
+          "biosimilar_generic": "infliximab-dyyb",
+          "biosimilar_brand": "Inflectra",
+          "route": "IV",
+          "regimen": "0,2,6wk then Q8W",
+          "starting_dose": "3",
+          "maintenance_dose": "3\u201310",
+          "dose_units": "mg/kg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2016/125544s000lbl.pdf",
+          "notes": "Escalation up to 10 mg/kg or q4\u20138w may increase infection risk.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hepatic": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y",
+            "Contra_Moderate_to_Severe_HF": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "infliximab-abda",
+          "biosimilar_brand": "Renflexis",
+          "route": "IV",
+          "regimen": "0,2,6wk then Q8W",
+          "starting_dose": "3",
+          "maintenance_dose": "3\u201310",
+          "dose_units": "mg/kg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/761054s021lbl.pdf",
+          "notes": "Escalation up to 10 mg/kg or q4\u20138w may increase infection risk.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hepatic": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y",
+            "Contra_Moderate_to_Severe_HF": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "infliximab-axxq",
+          "biosimilar_brand": "Avsola",
+          "route": "IV",
+          "regimen": "0,2,6wk then Q8W",
+          "starting_dose": "3",
+          "maintenance_dose": "3\u201310",
+          "dose_units": "mg/kg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/761086s000lbl.pdf",
+          "notes": "Escalation up to 10 mg/kg or q4\u20138w may increase infection risk.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_HBV": "Y",
+            "Warn_Malignancy": "Y",
+            "Warn_Hepatic": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_Latent_or_Active_TB": "Y",
+            "Contra_Moderate_to_Severe_HF": "Y"
+          }
+        }
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 3
+    },
+    {
+      "originator_generic": "Rituximab",
+      "originator_brand": "Rituxan",
+      "dmard_class": "bDMARD (anti-CD20)",
+      "moa": "Monoclonal antibody targeting CD20 on B lymphocytes",
+      "route": "IV",
+      "regimen": "1,000 mg IV on days 1 & 15; repeat ~every 24 weeks",
+      "starting_dose": "1000",
+      "maintenance_dose": "1000",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/103705s5464lbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_HBV": "Y",
+        "Warn_GI_Perforation": "Y",
+        "Warn_Hypersensitivity": "Y",
+        "Warn_Immunogenicity": "Y"
+      },
+      "contraindications": {
+        "Contra_Active_Serious_Infection": "Y",
+        "Contra_PML_Risk": "Y"
+      },
+      "biosimilars": [
+        {
+          "biosimilar_generic": "rituximab-abbs",
+          "biosimilar_brand": "Truxima",
+          "route": "IV",
+          "regimen": "Day 1 & 15; repeat q24w (\u2265q16w)",
+          "starting_dose": "1000",
+          "maintenance_dose": "1000",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761088s018lbl.pdf",
+          "notes": "Premedicate; retreat ~q24w (\u2265q16w) based on clinical evaluation; HBV screening required.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_HBV": "Y",
+            "Warn_GI_Perforation": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_PML_Risk": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "rituximab-pvvr",
+          "biosimilar_brand": "Ruxience",
+          "route": "IV",
+          "regimen": "Day 1 & 15; repeat q24w (\u2265q16w)",
+          "starting_dose": "1000",
+          "maintenance_dose": "1000",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761103s005lbl.pdf",
+          "notes": "Premedicate; retreat ~q24w (\u2265q16w) based on clinical evaluation; HBV screening required.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_HBV": "Y",
+            "Warn_GI_Perforation": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_PML_Risk": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "rituximab-arrx",
+          "biosimilar_brand": "Riabni",
+          "route": "IV",
+          "regimen": "Day 1 & 15; repeat q24w (\u2265q16w)",
+          "starting_dose": "1000",
+          "maintenance_dose": "1000",
+          "dose_units": "mg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761140s001lbl.pdf",
+          "notes": "Premedicate; retreat ~q24w (\u2265q16w) based on clinical evaluation; HBV screening required.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_HBV": "Y",
+            "Warn_GI_Perforation": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y",
+            "Contra_PML_Risk": "Y"
+          }
+        }
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 3
+    },
+    {
+      "originator_generic": "Tocilizumab",
+      "originator_brand": "Actemra",
+      "dmard_class": "bDMARD (IL-6R inhibitor)",
+      "moa": "Monoclonal antibody against IL-6 receptor",
+      "route": "SC/IV",
+      "regimen": "SC 162 mg QW/Q2W; IV 4\u20138 mg/kg Q4W",
+      "starting_dose": "162 (SC) / 4 (IV)",
+      "maintenance_dose": "162 SC weekly / 8 IV Q4W",
+      "dose_units": "mg / mg/kg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/125276s144,125472s056lbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_TB": "Y",
+        "Warn_GI_Perforation": "Y",
+        "Warn_Hematologic": "Y",
+        "Warn_Hepatic": "Y",
+        "Warn_Hypersensitivity": "Y",
+        "Warn_Immunogenicity": "Y"
+      },
+      "contraindications": {
+        "Contra_Active_Serious_Infection": "Y"
+      },
+      "biosimilars": [
+        {
+          "biosimilar_generic": "tocilizumab-bavi",
+          "biosimilar_brand": "Tofidence",
+          "route": "SC/IV",
+          "regimen": "SC 162 mg QW (\u2265100 kg) or Q2W (<100 kg); IV 4 mg/kg Q4W up to 8",
+          "starting_dose": "SC 162; IV 4",
+          "maintenance_dose": "SC 162; IV up to 8",
+          "dose_units": "mg / mg/kg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/761354s002lbl.pdf",
+          "notes": "Monitor ALT/AST, ANC, platelets; GI perforation risk esp. with diverticulitis history.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_GI_Perforation": "Y",
+            "Warn_Hematologic": "Y",
+            "Warn_Hepatic": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y"
+          }
+        },
+        {
+          "biosimilar_generic": "tocilizumab-aazg",
+          "biosimilar_brand": "Tyenne",
+          "route": "SC/IV",
+          "regimen": "SC 162 mg QW (\u2265100 kg) or Q2W (<100 kg); IV 4 mg/kg Q4W up to 8",
+          "starting_dose": "SC 162; IV 4",
+          "maintenance_dose": "SC 162; IV up to 8",
+          "dose_units": "mg / mg/kg",
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/761275s000lbl.pdf",
+          "notes": "Monitor ALT/AST, ANC, platelets; GI perforation risk esp. with diverticulitis history.",
+          "warnings": {
+            "Warn_Serious_Infections": "Y",
+            "Warn_TB": "Y",
+            "Warn_GI_Perforation": "Y",
+            "Warn_Hematologic": "Y",
+            "Warn_Hepatic": "Y",
+            "Warn_Hypersensitivity": "Y",
+            "Warn_Immunogenicity": "Y"
+          },
+          "contraindications": {
+            "Contra_Active_Serious_Infection": "Y"
+          }
+        }
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 2
+    },
+    {
+      "originator_generic": "Certolizumab pegol",
+      "originator_brand": "Cimzia",
+      "dmard_class": "bDMARD (TNFi)",
+      "moa": "PEGylated Fab' fragment against TNF-\u03b1",
+      "route": "SC",
+      "regimen": "400 mg at weeks 0, 2, 4; then 200 mg Q2W or 400 mg Q4W",
+      "starting_dose": "400",
+      "maintenance_dose": "200\u2013400",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/125160s275lbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_TB": "Y",
+        "Warn_HBV": "Y",
+        "Warn_Malignancy": "Y"
+      },
+      "contraindications": {
+        "Contra_Moderate_to_Severe_HF": "Y",
+        "Contra_Demyelinating_Disease": "Y"
+      },
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "Golimumab",
+      "originator_brand": "Simponi",
+      "dmard_class": "bDMARD (TNFi)",
+      "moa": "Monoclonal antibody against TNF-\u03b1",
+      "route": "SC/IV",
+      "regimen": "SC 50 mg monthly; IV (Simponi Aria) 2 mg/kg at 0 and 4 weeks, then Q8W",
+      "starting_dose": "50 (SC) / 2 (IV)",
+      "maintenance_dose": "50 monthly (SC) / 2 mg/kg Q8W (IV)",
+      "dose_units": "mg / mg/kg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/125289s146lbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_TB": "Y",
+        "Warn_HBV": "Y",
+        "Warn_Malignancy": "Y"
+      },
+      "contraindications": {
+        "Contra_Moderate_to_Severe_HF": "Y",
+        "Contra_Demyelinating_Disease": "Y"
+      },
+      "biosimilars": [
+        {
+          "biosimilar_generic": "tocilizumab-aazg",
+          "biosimilar_brand": "Biosimilar Non Approved Yet"
+        }
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 1
+    },
+    {
+      "originator_generic": "Abatacept",
+      "originator_brand": "Orencia",
+      "dmard_class": "bDMARD (co-stimulation modulator)",
+      "moa": "CTLA-4 Ig; inhibits CD80/86\u2013CD28 T-cell co-stimulation",
+      "route": "SC/IV",
+      "regimen": "SC 125 mg weekly; IV ~10 mg/kg at 0, 2, 4 weeks, then Q4W",
+      "starting_dose": "125 (SC) / ~10 (IV)",
+      "maintenance_dose": "125 weekly (SC) / ~10 mg/kg Q4W (IV)",
+      "dose_units": "mg / mg/kg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/125118s240lbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_Hypersensitivity": "Y"
+      },
+      "biosimilars": [
+        {}
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 1
+    },
+    {
+      "originator_generic": "Tofacitinib",
+      "originator_brand": "Xeljanz",
+      "dmard_class": "tsDMARD (JAKi)",
+      "moa": "Janus kinase (JAK1/3) inhibitor",
+      "route": "PO",
+      "regimen": "5 mg BID or XR 11 mg QD",
+      "starting_dose": "5 / 11 (XR)",
+      "maintenance_dose": "5 BID / 11 QD (XR)",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/203214s0xxlbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_Malignancy": "Y",
+        "Warn_Hematologic": "Y",
+        "Warn_Cardiovascular": "Y"
+      },
+      "biosimilars": [
+        {}
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 1
+    },
+    {
+      "originator_generic": "Baricitinib",
+      "originator_brand": "Olumiant",
+      "dmard_class": "tsDMARD (JAKi)",
+      "moa": "Janus kinase (JAK1/2) inhibitor",
+      "route": "PO",
+      "regimen": "2 mg QD",
+      "starting_dose": "2",
+      "maintenance_dose": "2",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/207924s0xxlbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_Malignancy": "Y",
+        "Warn_Hematologic": "Y",
+        "Warn_Cardiovascular": "Y"
+      },
+      "biosimilars": [
+        {}
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 1
+    },
+    {
+      "originator_generic": "Upadacitinib",
+      "originator_brand": "Rinvoq",
+      "dmard_class": "tsDMARD (JAKi)",
+      "moa": "Selective JAK1 inhibitor",
+      "route": "PO",
+      "regimen": "15 mg QD",
+      "starting_dose": "15",
+      "maintenance_dose": "15",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/211675s0xxlbl.pdf",
+      "warnings": {
+        "Warn_Serious_Infections": "Y",
+        "Warn_Malignancy": "Y",
+        "Warn_Hematologic": "Y",
+        "Warn_Cardiovascular": "Y"
+      },
+      "biosimilars": [
+        {}
+      ],
+      "has_biosimilars": true,
+      "biosimilar_count": 1
+    },
+    {
+      "originator_generic": "methotrexate",
+      "originator_brand": "Methotrexate",
+      "dmard_class": "csDMARD",
+      "moa": "Antimetabolite; dihydrofolate reductase inhibitor",
+      "route": "PO/SC/IM",
+      "regimen": "Weekly",
+      "starting_dose": "7.5\u201315",
+      "maintenance_dose": "15\u201325",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/008085s068lbl.pdf",
+      "warnings": {
+        "Warn_Hematologic": "Y",
+        "Warn_Hepatic": "Y",
+        "Warn_Hypersensitivity": "Y"
+      },
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "leflunomide",
+      "originator_brand": "Arava",
+      "dmard_class": "csDMARD",
+      "moa": "Pyrimidine synthesis inhibitor (DHODH)",
+      "route": "PO",
+      "regimen": "Daily",
+      "starting_dose": "10\u201320",
+      "maintenance_dose": "10\u201320",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/020905s033lbl.pdf",
+      "warnings": {
+        "Warn_Hepatic": "Y"
+      },
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "hydroxychloroquine",
+      "originator_brand": "Plaquenil",
+      "dmard_class": "csDMARD",
+      "moa": "Antimalarial; TLR signaling modulation",
+      "route": "PO",
+      "regimen": "Daily/BID",
+      "starting_dose": "200",
+      "maintenance_dose": "200\u2013400",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/009768s054lbl.pdf",
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "sulfasalazine",
+      "originator_brand": "Azulfidine",
+      "dmard_class": "csDMARD",
+      "moa": "5-ASA derivative; immunomodulator",
+      "route": "PO",
+      "regimen": "BID",
+      "starting_dose": "500",
+      "maintenance_dose": "1000",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2009/007073s124lbl.pdf",
+      "warnings": {
+        "Warn_Hypersensitivity": "Y"
+      },
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "ibuprofen",
+      "originator_brand": "Advil/Motrin",
+      "dmard_class": "NSAID (symptomatic)",
+      "moa": "Nonselective COX inhibitor",
+      "route": "PO",
+      "regimen": "TID/QID",
+      "starting_dose": "400",
+      "maintenance_dose": "400\u2013800",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2007/017463s105lbl.pdf",
+      "warnings": {
+        "Warn_GI_Perforation": "Y",
+        "Warn_Hepatic": "Y"
+      },
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "naproxen",
+      "originator_brand": "Aleve/Naprosyn",
+      "dmard_class": "NSAID (symptomatic)",
+      "moa": "Nonselective COX inhibitor",
+      "route": "PO",
+      "regimen": "BID",
+      "starting_dose": "250\u2013375",
+      "maintenance_dose": "250\u2013500",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/017581s115,018164s065,020067s024lbl.pdf",
+      "warnings": {
+        "Warn_GI_Perforation": "Y"
+      },
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "diclofenac",
+      "originator_brand": "Voltaren",
+      "dmard_class": "NSAID (symptomatic)",
+      "moa": "Nonselective COX inhibitor",
+      "route": "PO/Topical",
+      "regimen": "BID/TID",
+      "starting_dose": "50",
+      "maintenance_dose": "50\u201375",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/019201s048lbl.pdf",
+      "warnings": {
+        "Warn_GI_Perforation": "Y"
+      },
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "celecoxib",
+      "originator_brand": "Celebrex",
+      "dmard_class": "NSAID (COX-2 selective)",
+      "moa": "COX-2 selective inhibitor",
+      "route": "PO",
+      "regimen": "BID",
+      "starting_dose": "100",
+      "maintenance_dose": "100\u2013200",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/020998s050lbl.pdf",
+      "warnings": {
+        "Warn_Cardiovascular": "Y"
+      },
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "prednisone",
+      "originator_brand": "Prednisone",
+      "dmard_class": "Glucocorticoid (bridge/flare)",
+      "moa": "Glucocorticoid receptor agonist",
+      "route": "PO",
+      "regimen": "Daily",
+      "starting_dose": "5\u201310",
+      "maintenance_dose": "Lowest effective",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/202020s013lbl.pdf",
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    },
+    {
+      "originator_generic": "methylprednisolone",
+      "originator_brand": "Medrol",
+      "dmard_class": "Glucocorticoid (bridge/flare)",
+      "moa": "Glucocorticoid receptor agonist",
+      "route": "PO/IV/IM/IA",
+      "regimen": "Daily or bolus",
+      "starting_dose": "4\u201316 (PO)",
+      "maintenance_dose": "Taper",
+      "dose_units": "mg",
+      "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/011153s075lbl.pdf",
+      "biosimilars": [],
+      "has_biosimilars": false,
+      "biosimilar_count": 0
+    }
+  ],
+  "classes": {
+    "bDMARD (TNFi)": [
+      {
+        "generic": "Adalimumab",
+        "brand": "Humira",
+        "has_biosimilars": true,
+        "biosimilar_count": 8
+      },
+      {
+        "generic": "Certolizumab pegol",
+        "brand": "Cimzia",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      },
+      {
+        "generic": "Etanercept",
+        "brand": "Enbrel",
+        "has_biosimilars": true,
+        "biosimilar_count": 2
+      },
+      {
+        "generic": "Golimumab",
+        "brand": "Simponi",
+        "has_biosimilars": true,
+        "biosimilar_count": 1
+      },
+      {
+        "generic": "Infliximab",
+        "brand": "Remicade",
+        "has_biosimilars": true,
+        "biosimilar_count": 3
+      }
+    ],
+    "bDMARD (anti-CD20)": [
+      {
+        "generic": "Rituximab",
+        "brand": "Rituxan",
+        "has_biosimilars": true,
+        "biosimilar_count": 3
+      }
+    ],
+    "bDMARD (IL-6R inhibitor)": [
+      {
+        "generic": "Tocilizumab",
+        "brand": "Actemra",
+        "has_biosimilars": true,
+        "biosimilar_count": 2
+      }
+    ],
+    "bDMARD (co-stimulation modulator)": [
+      {
+        "generic": "Abatacept",
+        "brand": "Orencia",
+        "has_biosimilars": true,
+        "biosimilar_count": 1
+      }
+    ],
+    "tsDMARD (JAKi)": [
+      {
+        "generic": "Baricitinib",
+        "brand": "Olumiant",
+        "has_biosimilars": true,
+        "biosimilar_count": 1
+      },
+      {
+        "generic": "Tofacitinib",
+        "brand": "Xeljanz",
+        "has_biosimilars": true,
+        "biosimilar_count": 1
+      },
+      {
+        "generic": "Upadacitinib",
+        "brand": "Rinvoq",
+        "has_biosimilars": true,
+        "biosimilar_count": 1
+      }
+    ],
+    "csDMARD": [
+      {
+        "generic": "hydroxychloroquine",
+        "brand": "Plaquenil",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      },
+      {
+        "generic": "leflunomide",
+        "brand": "Arava",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      },
+      {
+        "generic": "methotrexate",
+        "brand": "Methotrexate",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      },
+      {
+        "generic": "sulfasalazine",
+        "brand": "Azulfidine",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      }
+    ],
+    "NSAID (symptomatic)": [
+      {
+        "generic": "diclofenac",
+        "brand": "Voltaren",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      },
+      {
+        "generic": "ibuprofen",
+        "brand": "Advil/Motrin",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      },
+      {
+        "generic": "naproxen",
+        "brand": "Aleve/Naprosyn",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      }
+    ],
+    "NSAID (COX-2 selective)": [
+      {
+        "generic": "celecoxib",
+        "brand": "Celebrex",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      }
+    ],
+    "Glucocorticoid (bridge/flare)": [
+      {
+        "generic": "methylprednisolone",
+        "brand": "Medrol",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      },
+      {
+        "generic": "prednisone",
+        "brand": "Prednisone",
+        "has_biosimilars": false,
+        "biosimilar_count": 0
+      }
+    ]
+  }
+}

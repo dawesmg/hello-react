@@ -1,0 +1,876 @@
+{
+  "generated_from": "RA_Biosimilars_Full_Filled_v2.xlsx#Original_Data_FILLED",
+  "originators": [
+    {
+      "originator_brand": "Actemra",
+      "originator_generic": "Tocilizumab",
+      "biosimilars": [
+        {
+          "biosimilar_brand": "Tofidence",
+          "biosimilar_generic": "tocilizumab-bavi",
+          "route": "SC/IV",
+          "regimen": "SC 162 mg QW (≥100 kg) or Q2W (<100 kg); IV 4 mg/kg Q4W up to 8",
+          "starting_dose": "SC 162; IV 4",
+          "maintenance_dose": "SC 162; IV up to 8",
+          "dose_units": "mg / mg/kg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": null,
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": "Y",
+            "hematologic": "Y",
+            "hepatic": "Y",
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": "Monitor ALT/AST, ANC, platelets; GI perforation risk esp. with diverticulitis history.",
+            "general": "S/C dose not in product monograph so not sure where that was from. TB warning not included  "
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/761354s002lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Tyenne",
+          "biosimilar_generic": "tocilizumab-aazg",
+          "route": "SC/IV",
+          "regimen": "SC 162 mg QW (≥100 kg) or Q2W (<100 kg); IV 4 mg/kg Q4W up to 8",
+          "starting_dose": "SC 162; IV 4",
+          "maintenance_dose": "SC 162; IV up to 8",
+          "dose_units": "mg / mg/kg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": null,
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": "Y",
+            "hematologic": "Y",
+            "hepatic": "Y",
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": "Monitor ALT/AST, ANC, platelets; GI perforation risk esp. with diverticulitis history.",
+            "general": "S/C dose not in product monograph so not sure where that was from. TB warning not included  "
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/761275s000lbl.pdf"
+        }
+      ]
+    },
+    {
+      "originator_brand": "Cimzia",
+      "originator_generic": "Certolizumab",
+      "biosimilars": [
+        {
+          "biosimilar_brand": "Biosimilar Non Approved Yet",
+          "biosimilar_generic": "tocilizumab-bavi",
+          "route": null,
+          "regimen": null,
+          "starting_dose": null,
+          "maintenance_dose": null,
+          "dose_units": null,
+          "warnings": {
+            "serious_infections": null,
+            "tb": null,
+            "hbv": null,
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": null,
+            "immunogenicity": null
+          },
+          "contraindications": {
+            "active_serious_infection": null,
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": null,
+            "general": null
+          },
+          "monograph_url": null
+        }
+      ]
+    },
+    {
+      "originator_brand": "Enbrel",
+      "originator_generic": "Etanercept",
+      "biosimilars": [
+        {
+          "biosimilar_brand": "Erelzi",
+          "biosimilar_generic": "etanercept-szzs",
+          "route": "SC",
+          "regimen": "Weekly",
+          "starting_dose": 50,
+          "maintenance_dose": 50,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": "Doses >50 mg/week not recommended for RA.",
+            "general": "good pick up of maximum dose"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2020/761042s012lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Eticovo",
+          "biosimilar_generic": "etanercept-ykro",
+          "route": "SC",
+          "regimen": "Weekly",
+          "starting_dose": 50,
+          "maintenance_dose": 50,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": "Doses >50 mg/week not recommended for RA.",
+            "general": "good pick up of maximum dose"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/761066s000lbl.pdf"
+        }
+      ]
+    },
+    {
+      "originator_brand": "Humira",
+      "originator_generic": "Adalimumab",
+      "biosimilars": [
+        {
+          "biosimilar_brand": "Amjevita",
+          "biosimilar_generic": "adalimumab-atto",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "general": "No contra indications on the PM but black box woarnings for the contraindications noted by AI as cotraindications suggesting AI was going for safer option. The notes nuances caught the increase dose that I saw. Everything else good"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/761024Orig1s011lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Cyltezo (interchangeable)",
+          "biosimilar_generic": "adalimumab-adbm",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "label_nuances": "Same dosing as Humira; consider weekly if not on MTX and inadequate response.",
+            "general": "dosing slightly nuance in the notes column as PM says 40mg weekly or 80g EOW"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761058s031lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Hyrimoz",
+          "biosimilar_generic": "adalimumab-adaz",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "label_nuances": "Humira-equivalent dosing; citrate-free versions may differ in injection volume.",
+            "general": "this citrate waarning could not be found in the PM"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/761071s000lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Hadlima",
+          "biosimilar_generic": "adalimumab-bwwd",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "label_nuances": "Humira-equivalent dosing; check device/volume differences.",
+            "general": "Again the note warning seems wrong "
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761059s004lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Abrilada",
+          "biosimilar_generic": "adalimumab-afzb",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "label_nuances": "Humira-equivalent dosing; weekly possible if not on MTX and response inadequate.",
+            "general": null
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/761118s000lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Hulio",
+          "biosimilar_generic": "adalimumab-fkjp",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "Some patients with RA not receiving methotrexate may benefit from increasing the dosage to 40 mg every week or 80 mg EOW",
+            "label_nuances": "Humira-equivalent dosing; weekly alternative noted in some labels.",
+            "general": null
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/761154s005lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Yusimry",
+          "biosimilar_generic": "adalimumab-aqvh",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "Some patients with RA not receiving methotrexate may benefit from increasing the dosage to 40 mg every week or 80 mg EOW",
+            "label_nuances": "Humira-equivalent dosing; check device/volume options.",
+            "general": null
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761216s000lbl.pdf"
+        }
+      ]
+    },
+    {
+      "originator_brand": "Olumiant",
+      "originator_generic": "JAK Inhibitors (small molecule drug - not biologic therefore have generics but not biosimilars)",
+      "biosimilars": [
+        {
+          "biosimilar_brand": null,
+          "biosimilar_generic": "Baricitinib (Olumiant): generic programs under way, not yet in U.S./EU.",
+          "route": null,
+          "regimen": null,
+          "starting_dose": null,
+          "maintenance_dose": null,
+          "dose_units": null,
+          "warnings": {
+            "serious_infections": null,
+            "tb": null,
+            "hbv": null,
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": null,
+            "immunogenicity": null
+          },
+          "contraindications": {
+            "active_serious_infection": null,
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": null,
+            "general": null
+          },
+          "monograph_url": null
+        }
+      ]
+    },
+    {
+      "originator_brand": "Orencia",
+      "originator_generic": "Abatacept",
+      "biosimilars": [
+        {
+          "biosimilar_brand": "Biosimilar Non Approved Yet",
+          "biosimilar_generic": null,
+          "route": null,
+          "regimen": null,
+          "starting_dose": null,
+          "maintenance_dose": null,
+          "dose_units": null,
+          "warnings": {
+            "serious_infections": null,
+            "tb": null,
+            "hbv": null,
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": null,
+            "immunogenicity": null
+          },
+          "contraindications": {
+            "active_serious_infection": null,
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": null,
+            "general": null
+          },
+          "monograph_url": null
+        }
+      ]
+    },
+    {
+      "originator_brand": "Remicade",
+      "originator_generic": "Infliximab",
+      "biosimilars": [
+        {
+          "biosimilar_brand": "Inflectra",
+          "biosimilar_generic": "infliximab-dyyb",
+          "route": "IV",
+          "regimen": "0,2,6wk then Q8W",
+          "starting_dose": 3,
+          "maintenance_dose": "3–10",
+          "dose_units": "mg/kg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": "Y",
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": "Y",
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": "Escalation up to 10 mg/kg or q4–8w may increase infection risk.",
+            "general": "nice catch of increased dose to 10mg, BUT missed hepatic and demyelinating"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2016/125544s000lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Renflexis",
+          "biosimilar_generic": "infliximab-abda",
+          "route": "IV",
+          "regimen": "0,2,6wk then Q8W",
+          "starting_dose": 3,
+          "maintenance_dose": "3–10",
+          "dose_units": "mg/kg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": "Y",
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": "Y",
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": "Escalation up to 10 mg/kg or q4–8w may increase infection risk.",
+            "general": "nice catch of increased dose to 10mg, BUT missed hepatic and demyelinating"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/761054s021lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Avsola",
+          "biosimilar_generic": "infliximab-axxq",
+          "route": "IV",
+          "regimen": "0,2,6wk then Q8W",
+          "starting_dose": 3,
+          "maintenance_dose": "3–10",
+          "dose_units": "mg/kg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": "Y",
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": "Y",
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": "Escalation up to 10 mg/kg or q4–8w may increase infection risk.",
+            "general": "nice catch of increased dose to 10mg, BUT missed hepatic and demyelinating"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/761086s000lbl.pdf"
+        }
+      ]
+    },
+    {
+      "originator_brand": "Rinvoq",
+      "originator_generic": "JAK Inhibitors (small molecule drug - not biologic therefore have generics but not biosimilars)",
+      "biosimilars": [
+        {
+          "biosimilar_brand": null,
+          "biosimilar_generic": "Upadacitinib (Rinvoq): patent life extends into the 2030s; generics not expected soon.",
+          "route": null,
+          "regimen": null,
+          "starting_dose": null,
+          "maintenance_dose": null,
+          "dose_units": null,
+          "warnings": {
+            "serious_infections": null,
+            "tb": null,
+            "hbv": null,
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": null,
+            "immunogenicity": null
+          },
+          "contraindications": {
+            "active_serious_infection": null,
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": null,
+            "general": null
+          },
+          "monograph_url": null
+        }
+      ]
+    },
+    {
+      "originator_brand": "Rituxan",
+      "originator_generic": "Rituximab",
+      "biosimilars": [
+        {
+          "biosimilar_brand": "Truxima",
+          "biosimilar_generic": "rituximab-abbs",
+          "route": "IV",
+          "regimen": "Day 1 & 15; repeat q24w (≥q16w)",
+          "starting_dose": 1000,
+          "maintenance_dose": 1000,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": null,
+            "hbv": "Y",
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": "Y",
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": "Y"
+          },
+          "notes": {
+            "md": "I/V infusion only ",
+            "label_nuances": "Premedicate; retreat ~q24w (≥q16w) based on clinical evaluation; HBV screening required.",
+            "general": "Missed the GI perforation risk - did get the premedicate which is the important part. Also infusion only not bolus was not caught. Did get PML risk"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761088s018lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Ruxience",
+          "biosimilar_generic": "rituximab-pvvr",
+          "route": "IV",
+          "regimen": "Day 1 & 15; repeat q24w (≥q16w)",
+          "starting_dose": 1000,
+          "maintenance_dose": 1000,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": null,
+            "hbv": "Y",
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": "Y",
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": "Y"
+          },
+          "notes": {
+            "md": "I/V infusion only ",
+            "label_nuances": "Premedicate; retreat ~q24w (≥q16w) based on clinical evaluation; HBV screening required.",
+            "general": "Missed the GI perforation risk - did get the premedicate which is the important part. Also infusion only not bolus was not caught. Did get PML risk"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761103s005lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Riabni",
+          "biosimilar_generic": "rituximab-arrx",
+          "route": "IV",
+          "regimen": "Day 1 & 15; repeat q24w (≥q16w)",
+          "starting_dose": 1000,
+          "maintenance_dose": 1000,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": null,
+            "hbv": "Y",
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": "Y",
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": "Y"
+          },
+          "notes": {
+            "md": "I/V infusion only ",
+            "label_nuances": "Premedicate; retreat ~q24w (≥q16w) based on clinical evaluation; HBV screening required.",
+            "general": "Missed the GI perforation risk - did get the premedicate which is the important part. Also infusion only not bolus was not caught. Did get PML risk"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761140s001lbl.pdf"
+        }
+      ]
+    },
+    {
+      "originator_brand": "Simponi",
+      "originator_generic": "Golimumab",
+      "biosimilars": [
+        {
+          "biosimilar_brand": "Biosimilar Non Approved Yet",
+          "biosimilar_generic": "tocilizumab-aazg",
+          "route": null,
+          "regimen": null,
+          "starting_dose": null,
+          "maintenance_dose": null,
+          "dose_units": null,
+          "warnings": {
+            "serious_infections": null,
+            "tb": null,
+            "hbv": null,
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": null,
+            "immunogenicity": null
+          },
+          "contraindications": {
+            "active_serious_infection": null,
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": null,
+            "general": null
+          },
+          "monograph_url": null
+        }
+      ]
+    },
+    {
+      "originator_brand": "Xeljanz",
+      "originator_generic": "JAK Inhibitors (small molecule drug - not biologic therefore have generics but not biosimilars)",
+      "biosimilars": [
+        {
+          "biosimilar_brand": null,
+          "biosimilar_generic": "Tofacitinib (Xeljanz): generics launched in some markets (e.g., India, 2023+).",
+          "route": null,
+          "regimen": null,
+          "starting_dose": null,
+          "maintenance_dose": null,
+          "dose_units": null,
+          "warnings": {
+            "serious_infections": null,
+            "tb": null,
+            "hbv": null,
+            "malignancy": null,
+            "demyelinating": null,
+            "cardiac_hf": null,
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": null,
+            "immunogenicity": null
+          },
+          "contraindications": {
+            "active_serious_infection": null,
+            "latent_or_active_tb": null,
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": null,
+            "general": null
+          },
+          "monograph_url": null
+        }
+      ]
+    }
+  ]
+}

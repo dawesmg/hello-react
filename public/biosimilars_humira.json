@@ -1,0 +1,255 @@
+{
+  "originators": [
+    {
+      "originator_brand": "Humira",
+      "originator_generic": "Adalimumab",
+      "biosimilars": [
+        {
+          "biosimilar_brand": "Amjevita",
+          "biosimilar_generic": "adalimumab-atto",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": null,
+            "label_nuances": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "general": "No contra indications on the PM but black box woarnings for the contraindications noted by AI as cotraindications suggesting AI was going for safer option. The notes nuances caught the increase dose that I saw. Everything else good"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/761024Orig1s011lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Cyltezo (interchangeable)",
+          "biosimilar_generic": "adalimumab-adbm",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "label_nuances": "Same dosing as Humira; consider weekly if not on MTX and inadequate response.",
+            "general": "dosing slightly nuance in the notes column as PM says 40mg weekly or 80g EOW"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761058s031lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Hyrimoz",
+          "biosimilar_generic": "adalimumab-adaz",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "label_nuances": "Humira-equivalent dosing; citrate-free versions may differ in injection volume.",
+            "general": "this citrate waarning could not be found in the PM"
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/761071s000lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Hadlima",
+          "biosimilar_generic": "adalimumab-bwwd",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "label_nuances": "Humira-equivalent dosing; check device/volume differences.",
+            "general": "Again the note warning seems wrong "
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761059s004lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Abrilada",
+          "biosimilar_generic": "adalimumab-afzb",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "If not on MTX, some patients may use 40 mg weekly or 80 mg EOW per label.",
+            "label_nuances": "Humira-equivalent dosing; weekly possible if not on MTX and response inadequate.",
+            "general": null
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/761118s000lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Hulio",
+          "biosimilar_generic": "adalimumab-fkjp",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "Some patients with RA not receiving methotrexate may benefit from increasing the dosage to 40 mg every week or 80 mg EOW",
+            "label_nuances": "Humira-equivalent dosing; weekly alternative noted in some labels.",
+            "general": null
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/761154s005lbl.pdf"
+        },
+        {
+          "biosimilar_brand": "Yusimry",
+          "biosimilar_generic": "adalimumab-aqvh",
+          "route": "SC",
+          "regimen": "Q2W",
+          "starting_dose": 40,
+          "maintenance_dose": 40,
+          "dose_units": "mg",
+          "warnings": {
+            "serious_infections": "Y",
+            "tb": "Y",
+            "hbv": "Y",
+            "malignancy": "Y",
+            "demyelinating": "Y",
+            "cardiac_hf": "Y",
+            "gi_perforation": null,
+            "hematologic": null,
+            "hepatic": null,
+            "hypersensitivity": "Y",
+            "immunogenicity": "Y"
+          },
+          "contraindications": {
+            "active_serious_infection": "Y",
+            "latent_or_active_tb": "Y",
+            "moderate_to_severe_hf": null,
+            "demyelinating_disease": NaN,
+            "pml_risk": null
+          },
+          "notes": {
+            "md": "Some patients with RA not receiving methotrexate may benefit from increasing the dosage to 40 mg every week or 80 mg EOW",
+            "label_nuances": "Humira-equivalent dosing; check device/volume options.",
+            "general": null
+          },
+          "monograph_url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761216s000lbl.pdf"
+        }
+      ]
+    }
+  ]
+}
