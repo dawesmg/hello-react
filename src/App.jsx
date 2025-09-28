@@ -2,16 +2,20 @@ import RTPB_AllRA from "./RTPB_AllRA";
 
 // Inline EnvBadge component (no separate file needed)
 function EnvBadge() {
-  const env = import.meta.env.VITE_APP_ENV || "dev";
-  const bg = env === "prod" ? "#16a34a" : env === "preview" ? "#f59e0b" : "#3b82f6";
+  const raw = import.meta.env.VITE_APP_ENV ?? "dev";
+  const env = String(raw).trim().toLowerCase();   // normalize casing
+
+  const bg =
+    env === "prod"    ? "#16a34a" :   // green
+    env === "preview" ? "#f59e0b" :   // yellow
+                        "#3b82f6";    // blue (dev/default)
+
   return (
     <div
-      title={`Environment: ${String(env).toUpperCase()}`}
       style={{
         position: "fixed",
         right: 8,
         bottom: 8,
-        zIndex: 9999,
         background: bg,
         color: "#fff",
         borderRadius: 6,
@@ -19,13 +23,13 @@ function EnvBadge() {
         fontSize: 11,
         fontWeight: 600,
         opacity: 0.9,
+        zIndex: 9999,
       }}
     >
-      {String(env).toUpperCase()}
+      {env.toUpperCase()}
     </div>
   );
 }
-
 export default function App() {
   return (
     <div>
