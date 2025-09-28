@@ -1,4 +1,11 @@
+import EnvBadge from "./components/EnvBadge";
 import RTPB_AllRA from "./RTPB_AllRA";
+
 export default function App() {
-  return <RTPB_AllRA />;
+  return (
+    <div>
+      <RTPB_AllRA />
+      <EnvBadge />
+    </div>
+  );
 }
