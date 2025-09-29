@@ -1,7 +1,7 @@
 // src/App.jsx
 import { useState } from 'react';
 import RTPB_AllRA from './RTPB_AllRA';        // your existing main component
-import AdminFlags from './AdminFlags.jsx';    // new admin modal
+import AdminFlags from './AdminFlags.jsx';    // admin modal
 import { getFlag } from './flags';            // feature flags helper
 
 // Example gated UI element
