@@ -1,55 +1,11 @@
 
-
-
-/**
- * RTPB_AllRA.jsx
- * -----------------------------------------------------------
- * Phase 0 Documentation Block
- *
- * Purpose:
- *   Rapid RTBC demo flow locked to Rheumatoid Arthritis (RA).
- *   This phase establishes core scaffolding, resilience, and
- *   dev-only tooling for safe demos and team onboarding.
- *
- * Implemented Features:
- *   • Feature Flags (flags.js + Admin modal) for safe toggles
- *   • EvidenceHints bar, gated by flag
- *   • Environment badge + env-colored Admin button
- *   • ErrorBoundary wrapper with crash-test hook
- *   • RA-only flow (indications grid hidden, Change Disease removed)
- *   • Admin Console stub (Phase 0.6 placeholder)
- *   • RTBC toggle flag (Simulated vs Live mode stub)
- *   • Dev-only logging helper with key log points
- *
- * Layout Guide:
- *   - Header: title, Admin buttons, environment badge
- *   - EvidenceHintsBar: appears below header if flag is on
- *   - Main: ErrorBoundary wrapping RTPB_AllRA
- *   - Drug selection grid → Biosimilars modal → Summary/RX view
- *   - Evidence modals (safe defaults to prevent crashes)
- *
- * Acceptance Criteria:
- *   New contributors can open this file and quickly grasp
- *   Phase 0 structure, flow, and toggles before extending.
- * -----------------------------------------------------------
- */
-
-
+// RTPB_AllRA.jsx
 import React, { useEffect, useMemo, useState } from "react";
 
 import raw from "./data/ra_all_drugs_enriched.json";
 import Evidence from "./components/Evidence.jsx";      // <-- you said this exists
 import EVIDENCE from "./data/evidence_biosimilars.js"; // <-- include .json if it's JSON
 import useDebouncedValue from "./useDebouncedValue";
-import { getFlag } from "./flags";
-import { log, warn } from "./utils/log";
-import DiseaseActivity from "./components/DiseaseActivity.jsx";
-
-
-const RA = "Rheumatoid arthritis";
-const SHOW_INDICATIONS = false; // RA-locked demo
-
-
 
 
 
@@ -330,7 +286,6 @@ function getDisplay(selection) {
   return { brand, generic };
 }
 
-
 /* =========================================
    Class-mates panel
 ========================================= */
@@ -375,29 +330,6 @@ function ClassMatesPanel({ selection, onOpenBiosimilars }) {
   );
 }
 
-// --- RTBC providers (Phase 0.7) ---
-async function simulateRTBC(selection, disease) {
-  // Fake latency + deterministic-ish payload for the demo
-  await new Promise((r) => setTimeout(r, 400));
-  return {
-    likelihood: 0.73,
-    patientCost: 18.5,
-    flags: {
-      pa: true,
-      stepTherapy: false,
-      quantityLimit: true,
-      specialtyPharmacy: true,
-    },
-    requirements: ["Trial of methotrexate", "TB test in past 12 months"],
-  };
-}
-
-async function liveRTBC(selection, disease) {
-  // TODO: replace with real network call in Phase 2
-  // For now, reuse simulator so “Live” path exercises the same UI.
-  return simulateRTBC(selection, disease);
-}
-
 /* =========================================
    Main component
 ========================================= */
@@ -417,64 +349,8 @@ export default function RTPB_AllRA() {
   const [disease, setDisease] = useState(null);
   const [evidenceOpen, setEvidenceOpen] = useState(null); 
   const [showReasonDetail, setShowReasonDetail] = useState(false);
-  const [showDiseaseActivity, setShowDiseaseActivity] = useState(false);
-  const [activityLevel, setActivityLevel] = useState(null); // "low" | "moderate" | "high"
-  const [activityScore, setActivityScore] = useState(null); // numeric or null
-
-
-    // Track which reasons are expanded for full detail
-    const [expandedReasons, setExpandedReasons] = useState(new Set());
-
-    function expandAllReasons() {
-      setExpandedReasons(new Set(BIOSIMILAR_REASONS.map(r => r.key)));
-    }
-
-    function collapseAllReasons() {
-      setExpandedReasons(new Set());
-    }
-
-    function toggleReason(key) {
-      setExpandedReasons(prev => {
-        const next = new Set(prev);
-        if (next.has(key)) next.delete(key);
-        else next.add(key);
-        return next;
-      });
-    }
-
-function activityChipStyle(level) {
-  // base chip style
-  const base = {
-    borderRadius: 999,
-    padding: "4px 8px",
-    fontSize: 12,
-    border: "1px solid",
-    whiteSpace: "nowrap",
-  };
-  if (level === "low") {
-    return { ...base, background: "#dcfce7", color: "#065f46", borderColor: "#86efac" };   // green
-  }
-  if (level === "moderate") {
-    return { ...base, background: "#fef9c3", color: "#7c6f06", borderColor: "#fde68a" };   // yellow
-  }
-  if (level === "high") {
-    return { ...base, background: "#fee2e2", color: "#7f1d1d", borderColor: "#fecaca" };   // red
-  }
-  return { ...base, background: "#f1f5f9", color: "#0f172a", borderColor: "#e2e8f0" };     // neutral
-}
-
-function scoreChipStyle() {
-  return {
-    borderRadius: 999,
-    padding: "4px 8px",
-    fontSize: 12,
-    border: "1px solid #e2e8f0",
-    background: "#ffffff",
-    color: "#0f172a",
-    whiteSpace: "nowrap",
-  };
-}
-
+  
+  
   const BIOSIMILAR_REASONS = [
   {
     key: "equivalence",
@@ -555,31 +431,8 @@ function scoreChipStyle() {
   function handleSelect(item) {
     setSelection(item);
     setRtpb(null);
-    setDisease(RA); // lock to RA on selection
-    log("Disease selected RA only:", item);
-     // NEW: auto-open biosimilars if available
-  if (item?.has_biosimilars) {
-    const full = findOriginator(item.generic, item.brand);
-    const list = full?.originator?.biosimilars || [];
-    if (list.length > 0) {
-      setBiosFor({ generic: item.generic, brand: item.brand, list, parent: full });
-    }
+    setDisease(null);
   }
-  }
-
-  
-async function runRtbc() {
-  if (!selection) return;
-  setRtpbLoading(true);
-  try {
-    const isLive = getFlag("rtbcLive"); // ← controlled by flag
-    const provider = isLive ? liveRTBC : simulateRTBC;
-    const result = await provider(selection, disease || "Rheumatoid arthritis");
-    setRtpb(result);
-  } finally {
-    setRtpbLoading(false);
-  }
-}
 
   function selectCustomDrug(name) {
     const label = (name || "").trim();
@@ -604,8 +457,7 @@ async function runRtbc() {
     });
     setBiosFor(null);
     setRtpb(null);
-   setDisease(RA);
-   log("Custom Drug Name Disease selected:", item);
+    setDisease(null);
   }
 
   function openBiosimilarsFor(item) {
@@ -615,27 +467,15 @@ async function runRtbc() {
   }
 
   // ---- KEY FIX: keep biosimilar sticky in selection; never fall back to Humira for display
-function selectBiosimilar(b) {
-  if (!b) {
-    console.warn("[DEV] selectBiosimilar called with empty value");
-    return;
-  }
-  if (!biosFor?.parent) {
-    console.warn("[DEV] selectBiosimilar: missing biosFor.parent");
-    // If you prefer to hard-fail here, keep the return:
-    // return;
-  }
-
-  const parent = biosFor?.parent || {};
+  function selectBiosimilar(b) {
+  if (!biosFor?.parent) return;
+  const parent = biosFor.parent;
   const rawParent = parent.originator || {};
-
-  const toTitle = (g) =>
-    g ? g.replace(/\w\S*/g, (w) => w[0].toUpperCase() + w.slice(1).toLowerCase()) : "";
 
   const synthetic = {
     generic: b.biosimilar_generic || parent.generic || "",
     // If brand missing in JSON, derive from generic (title-case) so we never fall back to Humira
-    brand: b.biosimilar_brand || toTitle(b.biosimilar_generic) || parent.brand || "",
+    brand: b.biosimilar_brand || (b.biosimilar_generic ? b.biosimilar_generic.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase()) : ""),
 
     dmard_class: rawParent.dmard_class || parent.dmard_class || "",
     moa: rawParent.moa || parent.moa || "",
@@ -655,7 +495,7 @@ function selectBiosimilar(b) {
       moa: rawParent.moa,
       route: rawParent.route,
       warnings: rawParent.warnings || parent.warnings || {},
-      contraindications: rawParent.contraindications || parent.contraindications || {},
+      contraindications: rawParent.contraindications || parent.contraindications || {}
     },
 
     _isBiosimilar: true,
@@ -663,33 +503,25 @@ function selectBiosimilar(b) {
     _referenceGeneric: parent.generic || "",
     // 🔒 hard lock the names used by the UI
     _displayLock: {
-      brand: b.biosimilar_brand || toTitle(b.biosimilar_generic) || parent.brand || "",
-      generic: b.biosimilar_generic || parent.generic || "",
-    },
+      brand: b.biosimilar_brand || (b.biosimilar_generic ? b.biosimilar_generic.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase()) : ""),
+      generic: b.biosimilar_generic || parent.generic || ""
+    }
   };
 
-  console.log("[DEV] selectBiosimilar →", {
-    brand: synthetic.brand,
-    generic: synthetic.generic,
-    referenceBrand: synthetic._referenceBrand,
-  });
-
+  console.log("DEBUG selectBiosimilar →", synthetic.brand, synthetic.generic);
   setSelection(synthetic);
-  setDisease(RA);                  // lock to RA when picking a biosimilar
-  setBiosFor(null);                // close modal
+  setBiosFor(null);
   setRtpb(null);
-  setQuery("");                    // clear the search box so nothing re-highlights Humira
+  setQuery("");          // ← clear the search box so nothing re-highlights Humira
+  // keep disease as-is (don’t clear)
   setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
 }
 
-
-function openReasons() {
-  // reset & open the reasons panel/modal
-  setActiveReason(null);
-  setShowAllReasons(false);
-  setShowReasonDetail(true);  // ensures long detail shows under each reason
-  setReasonsOpen(true);
-}
+  function openReasons() {
+    setActiveReason(null);
+    setShowAllReasons(false);
+    setReasonsOpen(true);
+  }
 
   // ----- RX view payload (summary) -----
   const rxSummary = useMemo(() => {
@@ -851,47 +683,9 @@ function openReasons() {
         <input
           value={query}
           onChange={e => setQuery(e.target.value)}
-          onKeyDown={(e) => {
-              if (e.key === "Enter" && suggestions.length > 0) {
-                e.preventDefault(); // don’t submit forms / blur
-                // If your handler is named differently, replace handleSelect with it
-                handleSelect(suggestions[0]);
-                // (optional) clear the search box like we do after biosimilar select:
-                setQuery("");
-                // (optional) scroll to top if you do that elsewhere
-                // setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
-              }
-            }}
           placeholder="e.g., Humira, adalimumab, methotrexate…"
           style={{ border: "1px solid #e5e7eb", borderRadius: 10, padding: "10px 12px", minWidth: 260, width: "100%", marginBottom: 10 }}
         />
-<div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 6 }}>
-  <button
-    onClick={() => setShowDiseaseActivity(true)}
-    style={{
-      border: "1px solid #e5e7eb",
-      background: "#fff",
-      borderRadius: 12,
-      padding: "6px 10px",
-      cursor: "pointer",
-      fontSize: 12,
-    }}
-  >
-    Disease Activity Selection
-  </button>
-
-  {/* Activity level chip with color */}
-  {activityLevel && (
-    <span style={activityChipStyle(activityLevel)}>
-      Activity: {activityLevel.charAt(0).toUpperCase() + activityLevel.slice(1)}
-    </span>
-  )}
-
-  {/* Score chip (shows N/A until calculator supplies a score) */}
-  <span style={scoreChipStyle()}>
-    Score: {activityScore ?? "—"}
-  </span>
-</div>
 
         {!query && (
           <div style={{ fontSize: 13, color: "#64748b", marginTop: 6 }}>
@@ -919,7 +713,7 @@ function openReasons() {
         {/* Indications panel appears once a drug is selected and no disease chosen yet */}
   
 
-    `    {false && selection && !disease && (
+        {selection && !disease && (
           <div style={{ marginTop: 8, display: "flex", gap: 12, alignItems: "flex-start" }}>
             <div style={{ flex: 1 }} />
             <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 12, background: "#fff", minWidth: 300 }}>
@@ -934,7 +728,6 @@ function openReasons() {
                     <button
                       key={ind}
                       onClick={() => isRA && setDisease("Rheumatoid arthritis")}
-                      
                       disabled={!isRA}
                       style={{
                         textAlign: "left",
@@ -957,7 +750,7 @@ function openReasons() {
             <div style={{ border: "2px dashed red", padding: 8, marginTop: 8 }}>
   
 
-</div>`
+</div>
     
           </div>
         )}
@@ -1098,19 +891,17 @@ function openReasons() {
             })()}
           </div>
 
-         {/* Active disease chip */}
-<div style={{ marginTop: 8 }}>
-  <Pill> Disease: {disease || RA} </Pill>
-  {SHOW_INDICATIONS && (
-    <button
-      onClick={() => setDisease(null)}
-      style={{ marginLeft: 8, border: "1px solid #e5e7eb", background: "#fff", borderRadius: 8, padding: "4px 8px", cursor: "pointer", fontSize: 12 }}
-      title="Change disease"
-    >
-      Change
-    </button>
-  )}
-</div>
+          {/* Active disease chip */}
+          <div style={{ marginTop: 8 }}>
+            <Pill> Disease: {disease} </Pill>
+            <button
+              onClick={() => setDisease(null)}
+              style={{ marginLeft: 8, border: "1px solid #e5e7eb", background: "#fff", borderRadius: 8, padding: "4px 8px", cursor: "pointer", fontSize: 12 }}
+              title="Change disease"
+            >
+              Change
+            </button>
+          </div>
 
           {/* Actions: biosimilars + reasons */}
           {selection.has_biosimilars && (
@@ -1132,66 +923,33 @@ function openReasons() {
             </div>
           )}
 
-          {/* Check benefits (Simulated/Live) + Prescribe */}
-<div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10 }}>
- <button
-  onClick={async () => {
-    setRtpbLoading(true);
-    setRtpb(null);
+          {/* Check benefits (simulated) + Prescribe */}
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10 }}>
+            <button
+              onClick={() => {
+                setRtpbLoading(true);
+                setRtpb(null);
+                setTimeout(() => {
+                  setRtpb(simulateRTPBCheck(selection));
+                  setRtpbLoading(false);
+                }, 900);
+              }}
+              style={{ border: "1px solid #0ea5e9", background: "#0ea5e9", color: "#fff",
+                       borderRadius: 999, padding: "6px 10px", cursor: "pointer", fontSize: 12 }}
+            >
+              {rtpbLoading ? "Checking benefits…" : "Check benefits (simulated)"}
+            </button>
 
-    const mode = getFlag("rtbcLive") ? "Live" : "Simulated";
-    try {
-      // START log
-      const selLabel =
-        (selection && (selection.generic || selection.brand)) || "(none)";
-      log("RTBC check started", { mode, selection: selLabel });
-      // -----
-
-      // (Phase 2: real call goes here when mode === "Live")
-      await new Promise((r) => setTimeout(r, 900));
-      setRtpb(simulateRTPBCheck(selection));
-
-      // FINISH log
-      log("RTBC check finished", { mode, result: "ok" });
-    } catch (e) {
-      // ERROR log (will show only in dev)
-      log("RTBC check error", e?.message || String(e));
-    } finally {
-      setRtpbLoading(false);
-    }
-  }}
-  style={{
-    border: "1px solid #0ea5e9",
-    background: "#0ea5e9",
-    color: "#fff",
-    borderRadius: 999,
-    padding: "6px 10px",
-    cursor: "pointer",
-    fontSize: 12,
-  }}
->
-  {rtpbLoading
-    ? "Checking benefits…"
-    : `Check benefits (${getFlag("rtbcLive") ? "Live" : "Simulated"})`}
-</button>
-
-  <button
-    onClick={() => setMode("rx")}
-    disabled={!selection}
-    style={{
-      border: "1px solid #059669",
-      background: "#059669",
-      color: "#fff",
-      borderRadius: 999,
-      padding: "6px 10px",
-      cursor: "pointer",
-      fontSize: 12,
-    }}
-    title="Create a demo prescription"
-  >
-    Prescribe
-  </button>
-</div>
+            <button
+              onClick={() => setMode("rx")}
+              disabled={!selection}
+              style={{ border: "1px solid #059669", background: "#059669", color: "#fff",
+                       borderRadius: 999, padding: "6px 10px", cursor: "pointer", fontSize: 12 }}
+              title="Create a demo prescription"
+            >
+              Prescribe
+            </button>
+          </div>
 
           {/* RTPB result */}
           {rtpb && (
@@ -1244,35 +1002,6 @@ function openReasons() {
           onClose={() => setBiosFor(null)}
           title={`Biosimilars — ${biosFor.generic}${biosFor.brand ? " (" + biosFor.brand + ")" : ""}`}
         >
-          {/* NEW: top toolbar with Evidence button */}
-    
-     {/* Evidence button aligned left */}
-    <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: 8 }}>
-     <button
-        onClick={() => {
-          // Open reasons modal straight to: show ALL reasons + show FULL details
-          setActiveReason(null);
-          setShowAllReasons(true);
-          setReasonsOpen(true);
-          collapseAllReasons(); // ← default to collapsed
-    // if you still have showReasonDetail elsewhere, keep it off:
-    // setShowReasonDetail(false);
-        }}
-        style={{
-          border: "1px solid #334155",
-          background: "#334155",
-          color: "#fff",
-          borderRadius: 999,
-          padding: "6px 10px",
-          cursor: "pointer",
-          fontSize: 12
-        }}
-        title="See evidence for using biosimilars"
-      >
-        Evidence
-      </button>
-
-          </div>
           {!biosFor.list?.length ? (
             <div style={{ fontSize: 13, color: "#64748b" }}>No biosimilars found for this product.</div>
           ) : (
@@ -1336,17 +1065,12 @@ function openReasons() {
                   })()}
 
                   <div style={{ marginTop: 10 }}>
-                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // TEMP log so we know the click is firing
-                      console.log("[DEV] biosimilar click", b?.biosimilar_brand || b?.biosimilar_generic || b);
-                      selectBiosimilar(b);
-                    }}
-                    style={{ border: "1px solid #059669", background: "#059669", color: "#fff", borderRadius: 10, padding: "6px 10px", cursor: "pointer" }}
-                  >
-                    Select →
-                  </button>
+                    <button
+                     onClick={(e) => { e.stopPropagation(); selectBiosimilar(b); }}
+                      style={{ border: "1px solid #059669", background: "#059669", color: "#fff", borderRadius: 10, padding: "6px 10px", cursor: "pointer" }}
+                    >
+                      Select →
+                    </button>
                   </div>
                 </div>
               ))}
@@ -1355,106 +1079,127 @@ function openReasons() {
         </Modal>
       )}
 
- {/* Reasons modal */}
-{reasonsOpen && (
-  <Modal onClose={() => setReasonsOpen(false)} title="Five reasons to use biosimilars">
-    {/* Intro (list is static; no click-to-open now) */}
-    {!showAllReasons && !activeReason && (
-      <>
-        <div style={{ fontSize: 13, color: "#334155", marginBottom: 10 }}>
-          Click “See all” to view summaries. Use the black Evidence button in the biosimilars list to show full details inline.
-        </div>
+      {/* Reasons modal */}
+      {reasonsOpen && (
+        <Modal onClose={() => setReasonsOpen(false)} title="Five reasons to use biosimilars">
+          {!showAllReasons && !activeReason && (
+            <>
+              <div style={{ fontSize: 13, color: "#334155", marginBottom: 10 }}>
+                Click a reason to see details, or “See all” to expand everything.
+              </div>
+              <div style={{ display: "grid", gap: 10, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+                {BIOSIMILAR_REASONS.map((r) => (
+  <div
+    key={r.key || r.id}
+    style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 12, background: "#fff", cursor: "pointer" }}
+    onClick={() => setActiveReason(r.key || r.id)}
+  >
+    {/* Title row + Evidence button */}
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
+      <div style={{ fontWeight: 600 }}>{r.title}</div>
+     <button
+  type="button"
+  onClick={(e) => {
+  e.stopPropagation();
+  const k = r.key;
+  const ev = EVIDENCE_MAP[k];
+  alert(ev ? ev.points.join("\n• ") : "Evidence TBD");
+}}
+  style={{
+    border: "1px solid #334155",
+    background: "#334155",
+    color: "#fff",
+    borderRadius: 999,
+    padding: "6px 10px",
+    cursor: "default",
+    fontSize: 12
+  }}
+  title="Evidence"
+>
+  Evidence
+</button>
+    </div>
 
-        <div style={{ display: "grid", gap: 10, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
-          {BIOSIMILAR_REASONS.map((r) => (
-            <div
-              key={r.key || r.id}
-              style={{
-                border: "1px solid #e5e7eb",
-                borderRadius: 12,
-                padding: 12,
-                background: "#fff",
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
-                <div style={{ fontWeight: 600 }}>{r.title}</div>
+    {/* Optional blurb under the title */}
+    {r.blurb && (
+      <div style={{ fontSize: 13, color: "#334155", marginTop: 6 }}>
+        {r.blurb}
+      </div>
+    )}
+  </div>
+))}
+              </div>
+              <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
                 <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const ev = EVIDENCE_MAP[r.key];
-                    alert(ev ? ev.points.join("\n• ") : "Evidence TBD");
-                  }}
-                  style={{
-                    border: "1px solid #334155",
-                    background: "#334155",
-                    color: "#fff",
-                    borderRadius: 999,
-                    padding: "6px 10px",
-                    cursor: "default",
-                    fontSize: 12
-                  }}
-                  title="Evidence"
+                  onClick={() => setShowAllReasons(true)}
+                  style={{ border: "1px solid #0ea5e9", background: "#0ea5e9", color: "#fff",
+                           borderRadius: 10, padding: "6px 10px", cursor: "pointer" }}
                 >
-                  Evidence
+                  See all
                 </button>
               </div>
+            </>
+          )}
 
-              {r.blurb && (
-                <div style={{ fontSize: 13, color: "#334155", marginTop: 6 }}>
-                  {r.blurb}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
-          <button
-            onClick={() => setShowAllReasons(true)}
-            style={{ border: "1px solid #0ea5e9", background: "#0ea5e9", color: "#fff",
-                     borderRadius: 10, padding: "6px 10px", cursor: "pointer" }}
-          >
-            See all
-          </button>
-        </div>
-      </>
-    )}
-
-    {/* SHOW ALL: summaries + (if toggled) full detail under each reason */}
-   {showAllReasons && (
+        {!showAllReasons && activeReason && (
   <>
-    {BIOSIMILAR_REASONS.map((r) => {
-      const ev = EVIDENCE_MAP[r.key] || {};
-      const bullets = ev.points || r.bullets || (r.summary ? [r.summary] : []);
-      const hasDetail = !!(ev.detail || ev.detailHtml);
-      const isOpen = expandedReasons.has(r.key);
+    {/* Toolbar with Back · More detail · See all */}
+    <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+      <button
+        onClick={() => { setActiveReason(null); setShowReasonDetail(false); }}
+        style={{
+          border: "1px solid #e5e7eb",
+          background: "#fff",
+          borderRadius: 8,
+          padding: "4px 8px",
+          cursor: "pointer"
+        }}
+      >
+        ← Back
+      </button>
+
+      <button
+        onClick={() => setShowReasonDetail(v => !v)}
+        disabled={!EVIDENCE_MAP[activeReason]?.detail}
+        style={{
+          border: "1px solid #334155",
+          background: EVIDENCE_MAP[activeReason]?.detail ? "#334155" : "#f1f5f9",
+          color: EVIDENCE_MAP[activeReason]?.detail ? "#fff" : "#0f172a",
+          borderRadius: 8,
+          padding: "4px 8px",
+          cursor: EVIDENCE_MAP[activeReason]?.detail ? "pointer" : "not-allowed"
+        }}
+      >
+        {showReasonDetail ? "Hide detail" : "More detail"}
+      </button>
+
+      <button
+        onClick={() => setShowAllReasons(true)}
+        style={{
+          marginLeft: "auto",
+          border: "1px solid #0ea5e9",
+          background: "#0ea5e9",
+          color: "#fff",
+          borderRadius: 8,
+          padding: "4px 8px",
+          cursor: "pointer"
+        }}
+      >
+        See all
+      </button>
+    </div>
+
+    {/* Single reason card */}
+    {BIOSIMILAR_REASONS.filter(r => r.key === activeReason).map(r => {
+      const bullets =
+        (EVIDENCE_MAP[r.key]?.points) ||
+        r.bullets ||
+        (r.summary ? [r.summary] : []);
 
       return (
         <div key={r.key} style={{ marginBottom: 12 }}>
-          {/* Title row + per-reason toggle button */}
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ fontWeight: 700, flex: 1 }}>{r.title}</div>
-            {hasDetail && (
-              <button
-                onClick={() => toggleReason(r.key)}
-                style={{
-                  border: "1px solid #334155",
-                  background: isOpen ? "#334155" : "#fff",
-                  color: isOpen ? "#fff" : "#0f172a",
-                  borderRadius: 999,
-                  padding: "6px 10px",
-                  cursor: "pointer",
-                  fontSize: 12
-                }}
-                title={isOpen ? "Hide evidence" : "More evidence"}
-              >
-                {isOpen ? "Hide evidence" : "More evidence"}
-              </button>
-            )}
-          </div>
+          <div style={{ fontWeight: 700, marginBottom: 6 }}>{r.title}</div>
 
-          {/* Summaries */}
           {bullets.length > 0 ? (
             <ul style={{ marginLeft: 18 }}>
               {bullets.map((b, i) => (
@@ -1465,72 +1210,64 @@ function openReasons() {
             <div style={{ fontSize: 13, color: "#64748b" }}>No details available.</div>
           )}
 
-          {/* Expanded full detail per reason */}
-          {isOpen && hasDetail && (
-            ev.detailHtml ? (
-              <div
-                style={{
-                  marginTop: 10,
-                  padding: 12,
-                  border: "1px solid #e5e7eb",
-                  borderRadius: 10,
-                  background: "#fff",
-                  whiteSpace: "pre-wrap",
-                  lineHeight: 1.5,
-                  color: "#334155",
-                  fontSize: 14
-                }}
-                dangerouslySetInnerHTML={{ __html: ev.detailHtml }}
-              />
-            ) : (
-              <div
-                style={{
-                  marginTop: 10,
-                  padding: 12,
-                  border: "1px solid #e5e7eb",
-                  borderRadius: 10,
-                  background: "#fff",
-                  whiteSpace: "pre-wrap",
-                  lineHeight: 1.5,
-                  color: "#334155",
-                  fontSize: 14
-                }}
-              >
-                {ev.detail}
-              </div>
-            )
+          {/* Long detail if toggled */}
+          {showReasonDetail && EVIDENCE_MAP[r.key]?.detail && (
+            <div
+              style={{
+                marginTop: 10,
+                padding: 12,
+                border: "1px solid #e5e7eb",
+                borderRadius: 10,
+                background: "#fff",
+                whiteSpace: "pre-wrap",
+                lineHeight: 1.5,
+                color: "#334155",
+                fontSize: 14
+              }}
+            >
+              {EVIDENCE_MAP[r.key].detail}
+            </div>
           )}
         </div>
       );
     })}
-
-    {/* Footer controls */}
-    <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
-      <button
-        onClick={expandAllReasons}
-        style={{ border: "1px solid #e5e7eb", background: "#fff", borderRadius: 10, padding: "6px 10px", cursor: "pointer" }}
-      >
-        Expand all
-      </button>
-      <button
-        onClick={collapseAllReasons}
-        style={{ border: "1px solid #e5e7eb", background: "#fff", borderRadius: 10, padding: "6px 10px", cursor: "pointer" }}
-      >
-        Collapse all
-      </button>
-      <button
-        onClick={() => { setShowAllReasons(false); setActiveReason(null); collapseAllReasons(); /* setShowReasonDetail(false); */ }}
-        style={{ marginLeft: "auto", border: "1px solid #e5e7eb", background: "#fff", borderRadius: 10, padding: "6px 10px", cursor: "pointer" }}
-      >
-        Close section
-      </button>
-    </div>
   </>
 )}
-  </Modal>
-)}
+          {showAllReasons && (
+            <>
+             {BIOSIMILAR_REASONS.map(r => {
+                const bullets =
+                  (EVIDENCE_MAP[r.key]?.points) ||
+                  r.bullets ||
+                  (r.summary ? [r.summary] : []);
 
-   
+                return (
+                  <div key={r.key} style={{ marginBottom: 12 }}>
+                    <div style={{ fontWeight: 700, marginBottom: 6 }}>{r.title}</div>
+                    {bullets.length > 0 ? (
+                      <ul style={{ marginLeft: 18 }}>
+                        {bullets.map((b, i) => (
+                          <li key={i} style={{ marginBottom: 6 }}>{b}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div style={{ fontSize: 13, color: "#64748b" }}>No details available.</div>
+                    )}
+                  </div>
+                );
+              })}
+              <div style={{ marginTop: 8 }}>
+                <button
+                  onClick={() => { setShowAllReasons(false); setActiveReason(null); }}
+                  style={{ border: "1px solid #e5e7eb", background: "#fff", borderRadius: 10, padding: "6px 10px", cursor: "pointer" }}
+                >
+                  Collapse
+                </button>
+              </div>
+            </>
+          )}
+        </Modal>
+      )}
     </div>
   );
 }
