@@ -34,9 +34,7 @@
  * -----------------------------------------------------------
  */
 
-
 import React, { useEffect, useMemo, useState } from "react";
-
 import raw from "./data/ra_all_drugs_enriched.json";
 import Evidence from "./components/Evidence.jsx";      // <-- you said this exists
 import EVIDENCE from "./data/evidence_biosimilars.js"; // <-- include .json if it's JSON
@@ -44,7 +42,8 @@ import useDebouncedValue from "./useDebouncedValue";
 import { getFlag } from "./flags";
 import { log, warn } from "./utils/log";
 import DiseaseActivity from "./components/DiseaseActivity.jsx";
-
+import PA_RULES from "./data/pa_rules_ra.json";
+import { evaluatePA, resolveDrugKey } from "./pa/evaluatePA";
 
 const RA = "Rheumatoid arthritis";
 const SHOW_INDICATIONS = false; // RA-locked demo
@@ -422,6 +421,22 @@ export default function RTPB_AllRA() {
   const [activityScore, setActivityScore] = useState(null); // numeric or null
 
 
+  // --- PA (prototype) state ---
+const [showPaModal, setShowPaModal] = useState(false);
+const [paResult, setPaResult] = useState(null);
+
+// Minimal PA context; wire real values later
+const [paContext, setPaContext] = useState({
+  disease: "Rheumatoid arthritis",
+  diseaseActivity: "moderate",   // keep fixed for now
+  priorTherapies: [],
+  concurrentTherapies: [],
+  labs: {},                      // { tuberculosis_screening_date, hepatitis_b_screening_date }
+  documentation: {},
+  safetyAttestations: {},
+  prescriber: { specialty: "rheumatology" }
+});
+
     // Track which reasons are expanded for full detail
     const [expandedReasons, setExpandedReasons] = useState(new Set());
 
@@ -566,7 +581,15 @@ function scoreChipStyle() {
     }
   }
   }
-
+function runPA() {
+  if (!selection) return;
+  const dk =
+    resolveDrugKey(PA_RULES, selection.generic, selection.brand) ||
+    (selection.generic || "").toLowerCase();
+  const res = evaluatePA(PA_RULES, "optumrx-like", dk, "initialAuth", paContext);
+  setPaResult(res);
+  setShowPaModal(true);
+}
   
 async function runRtbc() {
   if (!selection) return;
@@ -1175,6 +1198,23 @@ function openReasons() {
     : `Check benefits (${getFlag("rtbcLive") ? "Live" : "Simulated"})`}
 </button>
 
+<button
+  onClick={runPA}
+  style={{
+    border: "1px solid #f59e0b",
+    background: "#f59e0b",
+    color: "#fff",
+    borderRadius: 999,
+    padding: "6px 10px",
+    cursor: "pointer",
+    fontSize: 12
+  }}
+  title="Prototype PA check using JSON rules"
+>
+  Check PA (prototype)
+</button>
+
+
   <button
     onClick={() => setMode("rx")}
     disabled={!selection}
@@ -1231,12 +1271,106 @@ function openReasons() {
   </section>
 )}
 
+
+
       {/* Class-mates */}
       {selection && disease && (
         <div style={{ marginTop: 12 }}>
           <ClassMatesPanel selection={selection} onOpenBiosimilars={openBiosimilarsFor} />
         </div>
       )}
+{/* PA Prototype Modal */}
+{showPaModal && (
+  <Modal onClose={() => setShowPaModal(false)} title="Prior Authorization — Prototype">
+    {paResult ? (
+      <div style={{ display: "grid", gap: 12 }}>
+        {/* Decision pill */}
+        <div>
+          <span style={{
+            display: "inline-block",
+            padding: "4px 10px",
+            borderRadius: 999,
+            background: paResult.decision === "approve" ? "#10b981" : "#f59e0b",
+            color: "#fff",
+            fontSize: 12,
+            marginRight: 8
+          }}>
+            {paResult.decision === "approve" ? "APPROVE" : "NEEDS INFO"}
+          </span>
+          <span style={{ fontSize: 12, color: "#64748b" }}>
+            {paResult.considered} criteria · {paResult.approvalMonths}-month default term
+          </span>
+        </div>
+
+        {/* Notes */}
+        {paResult.messages?.length > 0 && (
+          <div>
+            <div style={{ fontWeight: 600, marginBottom: 6 }}>Notes</div>
+            <ul style={{ marginLeft: 18 }}>
+              {paResult.messages.map((m, i) => <li key={i}>{m}</li>)}
+            </ul>
+          </div>
+        )}
+
+        {/* Missing inputs */}
+        {paResult.missing?.length > 0 && (
+          <div>
+            <div style={{ fontWeight: 600, marginBottom: 6 }}>Items required</div>
+            <div style={{ display: "grid", gap: 8 }}>
+              {paResult.missing.includes("tuberculosis_screening_date") && (
+                <div>
+                  <label style={{ fontSize: 14 }}>
+                    TB screening date:{" "}
+                    <input
+                      type="date"
+                      onChange={(e) => setPaContext(prev => ({
+                        ...prev,
+                        labs: { ...(prev.labs || {}), tuberculosis_screening_date: e.target.value }
+                      }))}
+                    />
+                  </label>
+                </div>
+              )}
+              {paResult.missing.includes("hepatitis_b_screening_date") && (
+                <div>
+                  <label style={{ fontSize: 14 }}>
+                    HBV screening date:{" "}
+                    <input
+                      type="date"
+                      onChange={(e) => setPaContext(prev => ({
+                        ...prev,
+                        labs: { ...(prev.labs || {}), hepatitis_b_screening_date: e.target.value }
+                      }))}
+                    />
+                  </label>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Re-evaluate */}
+        <div>
+          <button
+            onClick={() => {
+              const dk =
+                resolveDrugKey(PA_RULES, selection?.generic, selection?.brand) ||
+                (selection?.generic || "").toLowerCase();
+              const res = evaluatePA(PA_RULES, "optumrx-like", dk, "initialAuth", paContext);
+              setPaResult(res);
+            }}
+            style={{ border: "1px solid #334155", background: "#334155", color: "#fff",
+                     borderRadius: 8, padding: "6px 10px", cursor: "pointer", fontSize: 12 }}
+          >
+            Re-check
+          </button>
+        </div>
+      </div>
+    ) : (
+      <div>No result yet.</div>
+    )}
+  </Modal>
+)}
 
       {/* Biosimilars modal */}
       {biosFor && (

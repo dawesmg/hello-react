@@ -1,0 +1,14 @@
+{
+  "payers": [
+    {
+      "id": "optumrx-like",
+      "name": "OptumRx (Demo)",
+      "defaultApprovalMonths": 12,
+      "drugs": [
+        { "drugKey": "adalimumab", "aliases": ["humira", "hyrimoz", "adalimumab-adaz"] },
+        { "drugKey": "etanercept", "aliases": ["enbrel"] },
+        { "drugKey": "infliximab", "aliases": ["remicade", "infliximab-dyyb", "infliximab-abda"] }
+      ]
+    }
+  ]
+}
