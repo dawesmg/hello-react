@@ -36,8 +36,8 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import raw from "./data/ra_all_drugs_enriched.json";
-import Evidence from "./components/Evidence.jsx";      // <-- you said this exists
-import EVIDENCE from "./data/evidence_biosimilars.js"; // <-- include .json if it's JSON
+import Evidence from "./components/Evidence.jsx";      
+import { EVIDENCE_MAP, BIOSIMILAR_REASONS } from "./data/reasonsEvidence";
 import useDebouncedValue from "./useDebouncedValue";
 import { getFlag } from "./flags";
 import { log, warn } from "./utils/log";
@@ -45,66 +45,70 @@ import DiseaseActivity from "./components/DiseaseActivity.jsx";
 import PA_RULES from "./data/pa_rules_ra.json";
 import { evaluatePA, resolveDrugKey } from "./pa/evaluatePA";
 
+import DEMO_PATIENTS from "./data/demo_patients.json";
+
 const RA = "Rheumatoid arthritis";
 const SHOW_INDICATIONS = false; // RA-locked demo
 
 
-
-
-
-const EVIDENCE_MAP = {
-  equivalence: {
-    points: [
-      "Equivalence demonstrated in RCTs and systematic reviews",
-      "Similar safety and immunogenicity to reference biologics"
-    ],
-    detail: `There is a wealth of evidence of the clinical equivalence of biosimilars from randomized controlled trials (RCTs) and systematic reviews.
-
-In one of the most recent and comprehensive systematic reviews of RCTs, biosimilars met equivalence with reference biologics in terms of ACR20 response (24 RCTs with 10,259 patients; RR, 1.01; 95% CrI, 0.98 to 1.04; τ² = 0.000) and change of HAQ-DI scores (14 RCTs with 5,579 patients; SMD, −0.04; 95% CrI, −0.11 to 0.02; τ² = 0.002) considering prespecified margins of equivalence. Trial sequential analysis found evidence for equivalence for ACR20 since 2017 and HAQ-DI since 2016. Overall, biosimilars were associated with similar safety and immunogenicity profiles compared with reference biologics (Ascef et al. 2023). This strong evidence base ensures prescribers can confidently recommend biosimilars without compromising patient outcomes. The safety profile of biosimilars has also been shown to be similar to reference products in post-marketing studies (Nikitina et al. 2025).
-
-This is not to say that automatically switching all patients to a biosimilar is appropriate or recommended. Switching is not without risk, and pharmacists should follow patients who switch to a biosimilar closely during the transition period to monitor for signs of flares/loss of disease control (Jankowska et al. 2025).`
-  },
-
-  cost: {
-    points: [
-      "Lower acquisition costs vs originators",
-      "Savings accrue to patients (OOP) and health systems"
-    ],
-    detail: `Biosimilars reduce costs substantially for both patients and healthcare systems. Although biologics account for approximately 2% of all US prescriptions, they represent almost 40% (~$120 billion) of prescription drug spending (Kvien et al. 2022). Biosimilars are generally priced lower than their reference biologics, leading to substantial cost savings; reported savings with biosimilars range from 44% to 69% compared with the price of the reference drug.
-
-Patients prescribed an infliximab biosimilar ultimately paid 12% less out of pocket than with the reference biologic (Socal et al. 2020). Use of less expensive biosimilars could save the US health system $54 billion over a decade (Mulcahy et al. 2018).`
-  },
-
-  priorauth: {
-    points: [
-      "Preferred biosimilars can reduce PA friction",
-      "Transition programs show high retention with minimal gaps"
-    ],
-    detail: `Although head-to-head studies on prior authorization (PA) rejection rates are limited, real-world transition programs provide strong indirect evidence. One in four Medicare beneficiaries with rheumatoid arthritis (RA) use high-cost biologic DMARDs, and spending for these drugs has risen sharply for Medicare Part D. All plans from 50 states and Washington, DC covered at least one biologic DMARD, but the vast majority required PA (97%) (Yazdany et al. 2015).
-
-In one large-scale program shifting patients from Humira to biosimilars, 91% of patients remained on biosimilars three months post-transition, with minimal therapy gaps and no meaningful increase in adverse events (Arzt et al. 2025). These findings suggest payer alignment with biosimilars reduces delays and administrative hurdles, thereby improving patient access.`
-  },
-
-  copay: {
-    points: [
-      "Copays for originators are often very high in Medicare",
-      "Biosimilars can cut copays dramatically (e.g., ~97%)"
-    ],
-    detail: `Copayments for biologics are often substantial under Medicare plans, sometimes exceeding $2,700 annually. Nearly all Part D formulary plans (81% to 100%) require a percentage coinsurance (average 29.6% of drug cost) rather than a fixed dollar copayment. This translates into mean out-of-pocket costs of $2,712–$2,774 before reaching the catastrophic phase of coverage, during which beneficiaries pay 5% of drug costs. Medicare Advantage plans cover more individual biologic DMARDs (55% to 100%) than stand-alone drug plans (22% to 100%) but charge higher average coinsurance (31.1% vs. 29.0%). In contrast, 6 of 9 non-biologic DMARDs are covered by nearly all plans without PAs at fixed copayments averaging $5–$10 per month (Yazdany et al. 2015).
-
-Real-world data demonstrate dramatic reductions in patient copayments for biosimilars. In a transition program, average patient copays fell by 97%, from $4.53/month (originator biologic) to $0.15/month (biosimilar) (Arzt et al. 2025). These reductions significantly lessen financial burden and may enhance adherence.`
-  },
-
-  effectiveness: {
-    points: [
-      "Lower costs + fewer barriers → better adherence/persistence",
-      "Broader access can improve real-world outcomes"
-    ],
-    detail: `While RCTs confirm equivalence, real-world studies highlight how lower costs and reduced barriers can translate to superior outcomes. A study published in AJMC found that patients using biosimilars had higher adherence and lower out-of-pocket costs compared to those on reference products (Joszt 2021). Transition programs help organizations and their clinicians address issues raised by professionals and patients (Transitioning to a Biosimilar Program 2021).
-
-The savings realized from the introduction of biosimilars have expanded treatment options and improved access to therapies across a spectrum of diseases. Cost savings from biosimilar use have also led to changes in treatment guidelines, increasing the availability of biologic medicines for earlier lines of therapy. This expansion of access can have a positive impact on the overall patient experience and can reduce the overall disease burden. However, the adoption of biosimilars has not been universally successful and faces challenges in the current healthcare landscape and in the pharmaceutical development pipeline (Kvien et al. 2025).`
+function getPaButtonStyle(result) {
+  if (!result) {
+    return {
+      label: "Check Prior Auth",
+      background: "#334155",
+      color: "#fff"
+    };
   }
+  if (result.decision === "approve") {
+    return {
+      label: "PA Approved",
+      background: "#16a34a", // green-600
+      color: "#fff"
+    };
+  }
+  if (result.decision === "needsInfo" || result.decision === "pend") {
+    return {
+      label: "More Info Needed",
+      background: "#dc2626", // red-600
+      color: "#fff"
+    };
+  }
+  return {
+    label: "Check Prior Auth",
+    background: "#334155",
+    color: "#fff"
+  };
+}
+
+
+
+
+// Nice labels for the dropdown values
+const SPECIALTY_LABELS = {
+  "rheumatology": "Rheumatology",
+  "immunology": "Immunology",
+  "internal-medicine-rheum": "Internal Medicine (Rheum)",
+  "family-medicine": "Family Medicine",
+  "general-practice": "General Practice",
+  "dermatology": "Dermatology",
+  "gastroenterology": "Gastroenterology",
+  "orthopedics": "Orthopedics",
+  "oncology": "Oncology",
+  "nurse-practitioner": "Nurse Practitioner",
+  "physician-assistant": "Physician Assistant",
 };
+
+function fmtSpecialty(val) {
+  return SPECIALTY_LABELS[val] || (val ? val : "— Not set —");
+}
+
+function isPreferredSpecialty(val = "") {
+  return /^(rheumatology|immunology|internal-medicine-rheum)$/i.test(val);
+}
+
+
+
+
 
 /* =========================================
    Data shaping from JSON
@@ -136,8 +140,8 @@ const CLASS_MAP = raw.classes || {};
 function Pill({ children, kind = "default" }) {
   const styles = {
     default:   { background: "#eef2ff", color: "#1e1b4b", border: "1px solid #c7d2fe" },
-    secondary: { background: "#f1f5f9", color: "#0f172a", border: "1px solid #e2e8f0" },
-    danger:    { background: "#fee2e2", color: "#7f1d1d", border: "1px solid #fecaca" },
+    secondary: { background: "#d8f4f7ff", color: "#0f172a", border: "1px solid #d8f4f7ff" },
+    danger:    { background: "#f8b6b6ff", color: "#7f1d1d", border: "1px solid #fecaca" },
   }[kind];
   return (
     <span style={{ ...styles, fontSize: 12, borderRadius: 999, padding: "3px 8px", display: "inline-block" }}>
@@ -162,36 +166,7 @@ function Modal({ onClose, children, title }) {
   );
 }
 
-/* =========================================
-   Reasons content (concise UI copy)
-========================================= */
-const BIOSIMILAR_REASONS = [
-  {
-    key: "equivalence",
-    title: "Proven Clinical Equivalence",
-    summary: "RCTs and reviews confirm biosimilars match originators in efficacy, safety, and immunogenicity."
-  },
-  {
-    key: "cost",
-    title: "Cost Savings for Patients and the Health System",
-    summary: "Biosimilars are significantly cheaper, reducing out-of-pocket and overall system spend."
-  },
-  {
-    key: "priorauth",
-    title: "Reduced Prior Authorization Barriers",
-    summary: "Payer programs suggest biosimilars face fewer delays and improve treatment access."
-  },
-  {
-    key: "copay",
-    title: "Lower Patient Copayments",
-    summary: "Real-world studies show copays reduced by up to 97%, easing burden and boosting adherence."
-  },
-  {
-    key: "effectiveness",
-    title: "Potential for Greater Real-World Effectiveness",
-    summary: "Lower costs and better access enhance persistence, making biosimilars more effective in practice."
-  }
-];
+
 
 /* =========================================
    Helpers (finders, safety, RTPB mock, indications, display)
@@ -204,6 +179,8 @@ function findOriginator(generic, brand) {
     (o.brand || "").toLowerCase() === b
   ) || null;
 }
+
+
 
 function extractSafety(obj) {
   if (!obj) return { warns: [], contras: [] };
@@ -424,8 +401,6 @@ export default function RTPB_AllRA() {
   // --- PA (prototype) state ---
 const [showPaModal, setShowPaModal] = useState(false);
 const [paResult, setPaResult] = useState(null);
-
-// Minimal PA context; wire real values later
 const [paContext, setPaContext] = useState({
   disease: "Rheumatoid arthritis",
   diseaseActivity: "moderate",   // keep fixed for now
@@ -434,8 +409,77 @@ const [paContext, setPaContext] = useState({
   labs: {},                      // { tuberculosis_screening_date, hepatitis_b_screening_date }
   documentation: {},
   safetyAttestations: {},
-  prescriber: { specialty: "rheumatology" }
+  prescriber: { specialty: "rheumatology" }  
 });
+
+function recomputePA(src = "manual") {
+  try {
+    if (!selection?.generic && !selection?.brand) {
+      setPaResult(null);
+      return;
+    }
+
+    const dk =
+      resolveDrugKey(PA_RULES, selection?.generic, selection?.brand) ||
+      (selection?.generic || "").toLowerCase();
+
+    const ctx = {
+      ...paContext,
+      diseaseActivity:
+        activityLevel || paContext.diseaseActivity || "moderate",
+    };
+
+    const res = evaluatePA(PA_RULES, "optumrx-like", dk, "initialAuth", ctx);
+
+    console.log(`[PA] recomputed via ${src}:`, {
+      drugKey: dk,
+      decision: res?.decision,
+      missing: res?.missing,
+    });
+
+    setPaResult(res);
+  } catch (err) {
+    console.error("[PA] recompute failed:", err);
+    setPaResult(null);
+  }
+}
+
+
+//demo patients
+const [selectedPatientId, setSelectedPatientId] = useState("ptA");
+const selectedPatient = useMemo(
+  () => DEMO_PATIENTS.find(p => p.id === selectedPatientId) || null,
+  [selectedPatientId]
+);
+
+// Keep your PA context in sync when the selected patient changes
+useEffect(() => {
+  if (!selectedPatient) return;
+  setPaContext(prev => ({
+    // preserve any live edits if you want, or replace wholesale:
+    ...selectedPatient
+  }));
+  // also reflect disease activity badge/colors if you want:
+  if (selectedPatient.diseaseActivity) {
+    setActivityLevel(selectedPatient.diseaseActivity);
+  }
+}, [selectedPatient]);
+
+// Auto-recompute PA whenever drug/patient/key PA fields change
+useEffect(() => {
+  recomputePA("effect: selection/patient/context");
+  // If your linter nags about missing deps, keep this exact list to avoid loops.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [
+  selection?.generic,
+  selection?.brand,
+  activityLevel,
+  selectedPatientId,
+  paContext.prescriber?.specialty,
+  paContext.labs?.tuberculosis_screening_date,
+  paContext.labs?.hepatitis_b_screening_date,
+]);
+
 
     // Track which reasons are expanded for full detail
     const [expandedReasons, setExpandedReasons] = useState(new Set());
@@ -590,7 +634,23 @@ function runPA() {
   setPaResult(res);
   setShowPaModal(true);
 }
-  
+ 
+function resolveDrugKey(rules, generic, brand) {
+  const g = (generic || "").toLowerCase().trim();
+  const b = (brand || "").toLowerCase().trim();
+  if (!g && !b) return null;
+
+  // exact generic
+  if (rules[g]) return g;
+
+  // try brand lookup → generic
+  for (const k of Object.keys(rules)) {
+    const brands = (rules[k]?.brands || []).map(x => (x || "").toLowerCase());
+    if (brands.includes(b)) return k;
+  }
+  return g || b || null;
+}
+
 async function runRtbc() {
   if (!selection) return;
   setRtpbLoading(true);
@@ -712,6 +772,20 @@ function openReasons() {
   setShowAllReasons(false);
   setShowReasonDetail(true);  // ensures long detail shows under each reason
   setReasonsOpen(true);
+}
+
+function openEvidenceFor(reasonKey) {
+  // Open the modal in “show all” view but expand only this reason
+  setActiveReason(null);
+  setShowAllReasons(true);
+  setReasonsOpen(true);
+  setExpandedReasons(new Set([reasonKey])); // expand exactly one
+
+  // Optional: scroll to the expanded section after render
+  setTimeout(() => {
+    const el = document.querySelector(`[data-reason="${reasonKey}"]`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 0);
 }
 
   // ----- RX view payload (summary) -----
@@ -858,15 +932,71 @@ function openReasons() {
     );
   }
 
+// ----- PA Button state (auto-colored based on result) -----
+const paDecision = paResult?.decision;
+const paButton = {
+  text:
+    paDecision === "approve"
+      ? "PA: Approved"
+      : paDecision === "needsInfo"
+      ? "PA: Needs Info"
+      : "Check PA",
+  bg:
+    paDecision === "approve"
+      ? "#059669"   // green
+      : paDecision === "needsInfo"
+      ? "#ef4444"   // red
+      : "#f59e0b",  // amber (default)
+  border:
+    paDecision === "approve"
+      ? "#059669"
+      : paDecision === "needsInfo"
+      ? "#ef4444"
+      : "#f59e0b",
+};
+
+
   // ----- MAIN APP (search + selection) -----
-  return (
-    <div style={page}>
-      <header style={{ marginBottom: 16 }}>
-        <div style={{ fontSize: 24, fontWeight: 600 }}>RA Drugs — Class Alternatives & Biosimilars</div>
-        <div style={{ fontSize: 13, color: "#334155" }}>
-          Type a <strong>generic</strong> or <strong>brand</strong>. Select a drug to see alternatives in class. Click the biosimilars badge to drill down.
-        </div>
-      </header>
+return (
+  <div style={page}>
+    <header style={{ marginBottom: 16 }}>
+      <div style={{ fontSize: 24, fontWeight: 600 }}>
+        RA Drugs — Class Alternatives & Biosimilars
+      </div>
+      <div style={{ fontSize: 13, color: "#334155" }}>
+        Type a <strong>generic</strong> or <strong>brand</strong>. Select a drug to see alternatives in class. Click the biosimilars badge to drill down.
+      </div>
+
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          marginTop: 8,
+          fontSize: 12,
+        }}
+      >
+        <div style={{ color: "#64748b" }}>Patient:</div>
+        <select
+          value={selectedPatientId}
+          onChange={(e) => setSelectedPatientId(e.target.value)}
+          style={{
+            border: "1px solid #e5e7eb",
+            borderRadius: 8,
+            padding: "4px 8px",
+            fontSize: 12,
+          }}
+        >
+          {DEMO_PATIENTS.map((p) => (
+            <option key={p.id} value={p.id}>
+              {p.display}
+            </option>
+          ))}
+        </select>
+      </div>
+      {/* 👆 end patient selector */}
+    </header>
 
       {/* Search */}
       <section style={{ ...card, marginBottom: 12 }}>
@@ -980,7 +1110,7 @@ function openReasons() {
             <div style={{ border: "2px dashed red", padding: 8, marginTop: 8 }}>
   
 
-</div>`
+</div>
     
           </div>
         )}
@@ -992,7 +1122,38 @@ function openReasons() {
             </div>
             <div style={{ display: "grid", gap: 8, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
               {suggestions.map(o => (
-                <div key={`${o.generic}|${o.brand}`} style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 12, background: "#fff" }}>
+                <div
+  key={`${o.generic}|${o.brand}`}
+  style={{
+    border: "1px solid #e5e7eb",
+    borderRadius: 12,
+    padding: 12,
+    background: "#fff",
+    cursor: "pointer"
+  }}
+  onClick={() => {
+    setSelection(o);
+    setQuery("");
+
+    // --- Auto-run Prior Auth evaluation when a drug is selected ---
+    const dk =
+      resolveDrugKey(PA_RULES, o?.generic, o?.brand) ||
+      o?.generic?.toLowerCase();
+
+    const result = evaluatePA(
+      PA_RULES,
+      "optumrx-like",
+      dk,
+      "initialAuth",
+      {
+        ...paContext,
+        diseaseActivity: activityLevel || paContext.diseaseActivity
+      }
+    );
+
+    setPaResult(result);
+  }}
+>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 8 }}>
                     <div>
                       <div style={{ fontWeight: 600 }}>{o.generic}</div>
@@ -1121,6 +1282,61 @@ function openReasons() {
             })()}
           </div>
 
+{/* Safety pills */}
+{selection?.originator && (() => {
+  const { warns, contras } = extractSafety(selection.originator);
+  if (!warns.length && !contras.length) return null;
+  return (
+    <div style={{ gridColumn: "1 / -1", marginTop: 8 }}>
+      <strong>Safety:</strong>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 6 }}>
+        {warns.map((w) => <Pill key={`w-${w}`} kind="secondary">{w}</Pill>)}
+        {contras.map((c) => <Pill key={`c-${c}`} kind="danger">{c}</Pill>)}
+      </div>
+
+      {/* 🔵🔴 Legend for color meaning */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "16px",
+          marginTop: "12px",
+          fontSize: "13px",
+          color: "#334155",
+          borderTop: "1px solid #e5e7eb",
+          paddingTop: "8px",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: "14px",
+              height: "14px",
+              borderRadius: "50%",
+              backgroundColor: "#3b82f6"
+            }}
+          ></span>
+          <span>Safety alerts / Adverse effects</span>
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: "14px",
+              height: "14px",
+              borderRadius: "50%",
+              backgroundColor: "#ef4444"
+            }}
+          ></span>
+          <span>Contraindications — avoid use</span>
+        </div>
+      </div>
+    </div>
+  );
+})()}
+
          {/* Active disease chip */}
 <div style={{ marginTop: 8 }}>
   <Pill> Disease: {disease || RA} </Pill>
@@ -1199,19 +1415,23 @@ function openReasons() {
 </button>
 
 <button
-  onClick={runPA}
+  onClick={() => {
+    recomputePA("button-click");
+    setShowPaModal(true);
+  }}
+  disabled={!selection}
   style={{
-    border: "1px solid #f59e0b",
-    background: "#f59e0b",
+    border: `1px solid ${paButton.border}`,
+    background: paButton.bg,
     color: "#fff",
     borderRadius: 999,
     padding: "6px 10px",
-    cursor: "pointer",
-    fontSize: 12
+    cursor: selection ? "pointer" : "not-allowed",
+    fontSize: 12,
   }}
   title="Prototype PA check using JSON rules"
 >
-  Check PA (prototype)
+  {paButton.text}
 </button>
 
 
@@ -1279,6 +1499,7 @@ function openReasons() {
           <ClassMatesPanel selection={selection} onOpenBiosimilars={openBiosimilarsFor} />
         </div>
       )}
+
 {/* PA Prototype Modal */}
 {showPaModal && (
   <Modal onClose={() => setShowPaModal(false)} title="Prior Authorization — Prototype">
@@ -1302,7 +1523,31 @@ function openReasons() {
           </span>
         </div>
 
-        {/* Notes */}
+{/* Prescriber specialty pill display */}
+<div>
+  <span
+    style={{
+      display: "inline-block",
+      padding: "4px 10px",
+      borderRadius: 999,
+      background: isPreferredSpecialty(paContext.prescriber?.specialty)
+        ? "#10b981" // green
+        : "#f59e0b", // amber
+      color: "#fff",
+      fontSize: 12,
+      marginRight: 8
+    }}
+  >
+    Prescriber: {fmtSpecialty(paContext.prescriber?.specialty)}
+  </span>
+  {!isPreferredSpecialty(paContext.prescriber?.specialty) && (
+    <span style={{ fontSize: 12, color: "#64748b" }}>
+      (Tip: Rheumatology/Immunology preferred)
+    </span>
+  )}
+</div>
+
+        {/* Messages */}
         {paResult.messages?.length > 0 && (
           <div>
             <div style={{ fontWeight: 600, marginBottom: 6 }}>Notes</div>
@@ -1312,11 +1557,12 @@ function openReasons() {
           </div>
         )}
 
-        {/* Missing inputs */}
+        {/* Missing items checklist (quick inputs) */}
         {paResult.missing?.length > 0 && (
           <div>
             <div style={{ fontWeight: 600, marginBottom: 6 }}>Items required</div>
             <div style={{ display: "grid", gap: 8 }}>
+              {/* TB / HBV dates */}
               {paResult.missing.includes("tuberculosis_screening_date") && (
                 <div>
                   <label style={{ fontSize: 14 }}>
@@ -1345,33 +1591,114 @@ function openReasons() {
                   </label>
                 </div>
               )}
+
+              {/* JAK attestations */}
+              {paResult.missing.some(m => ["cv_risk_discussed","thrombosis_risk_discussed","malignancy_risk_discussed"].includes(m)) && (
+                <div style={{ display: "grid", gap: 6 }}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      onChange={(e) => setPaContext(prev => ({
+                        ...prev,
+                        safetyAttestations: { ...(prev.safetyAttestations || {}), cv_risk_discussed: e.target.checked }
+                      }))}
+                    /> CV risk discussed
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      onChange={(e) => setPaContext(prev => ({
+                        ...prev,
+                        safetyAttestations: { ...(prev.safetyAttestations || {}), thrombosis_risk_discussed: e.target.checked }
+                      }))}
+                    /> Thrombosis risk discussed
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      onChange={(e) => setPaContext(prev => ({
+                        ...prev,
+                        safetyAttestations: { ...(prev.safetyAttestations || {}), malignancy_risk_discussed: e.target.checked }
+                      }))}
+                    /> Malignancy risk discussed
+                  </label>
+                </div>
+              )}
+
+              {/* Reauth response summary */}
+              {paResult.missing.includes("clinical_response_summary") && (
+                <div>
+                  <label style={{ fontSize: 14 }}>
+                    Clinical response summary:{" "}
+                    <textarea
+                      rows={3}
+                      style={{ width: "100%" }}
+                      onChange={(e) => setPaContext(prev => ({
+                        ...prev,
+                        documentation: { ...(prev.documentation || {}), clinical_response_summary: e.target.value }
+                      }))}
+                    />
+                  </label>
+                </div>
+              )}
             </div>
           </div>
         )}
 
-        {/* Re-evaluate */}
+        {/* Prescriber specialty tweak (if needed) */}
+        <div>
+          <div style={{ fontWeight: 600, marginBottom: 6 }}>Prescriber Specialty Edit</div>
+          <select
+            value={paContext.prescriber?.specialty || ""}
+            onChange={(e) =>
+              setPaContext((prev) => ({
+                ...prev,
+                prescriber: { ...(prev.prescriber || {}), specialty: e.target.value },
+              }))
+            }
+          >
+            <option value="">-- Select --</option>
+
+            {/* Preferred specialties (green pill) */}
+            <option value="rheumatology">Rheumatology</option>
+            <option value="immunology">Immunology</option>
+            <option value="internal-medicine-rheum">Internal Medicine (Rheum)</option>
+
+            {/* Non-preferred (will show amber pill + tip) */}
+            <option value="family-medicine">Family Medicine</option>
+            <option value="general-practice">General Practice</option>
+            <option value="dermatology">Dermatology</option>
+            <option value="gastroenterology">Gastroenterology</option>
+            <option value="orthopedics">Orthopedics</option>
+            <option value="oncology">Oncology</option>
+            <option value="nurse-practitioner">Nurse Practitioner</option>
+            <option value="physician-assistant">Physician Assistant</option>
+          </select>
+        </div>
+
+        {/* Re-check */}
         <div>
           <button
             onClick={() => {
-              const dk =
-                resolveDrugKey(PA_RULES, selection?.generic, selection?.brand) ||
-                (selection?.generic || "").toLowerCase();
-              const res = evaluatePA(PA_RULES, "optumrx-like", dk, "initialAuth", paContext);
+              if (!selection) return;
+              const dk = resolveDrugKey(PA_RULES, selection?.generic, selection?.brand) || selection?.generic?.toLowerCase();
+              const res = evaluatePA(PA_RULES, "optumrx-like", dk, "initialAuth", {
+                ...paContext,
+                diseaseActivity: activityLevel || paContext.diseaseActivity
+              });
               setPaResult(res);
             }}
-            style={{ border: "1px solid #334155", background: "#334155", color: "#fff",
-                     borderRadius: 8, padding: "6px 10px", cursor: "pointer", fontSize: 12 }}
+            style={{ border: "1px solid #334155", background: "#334155", color: "#fff", borderRadius: 8, padding: "6px 10px", cursor: "pointer" }}
           >
-            Re-check
+            Re-check now
           </button>
         </div>
       </div>
     ) : (
-      <div>No result yet.</div>
+      <div style={{ fontSize: 13, color: "#64748b" }}>No result yet.</div>
     )}
   </Modal>
 )}
-
       {/* Biosimilars modal */}
       {biosFor && (
         <Modal
@@ -1453,8 +1780,48 @@ function openReasons() {
                       </div>
                     );
                   })()}
-
+      {/* Safety legend */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          fontSize: 11,
+          color: "#475569",
+          marginTop: 8,
+          marginBottom: 4,
+          flexWrap: "wrap"
+        }}
+>
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: 12,
+              height: 12,
+              background: "#e0f2fe",
+              border: "1px solid #38bdf8",
+              borderRadius: 4
+            }}
+          ></span>
+          <span>Warning (adverse event)</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: 12,
+              height: 12,
+              background: "#fee2e2",
+              border: "1px solid #ef4444",
+              borderRadius: 4
+            }}
+          ></span>
+          <span>Contraindication</span>
+        </div>
+      </div>
                   {/* Safety for biosimilar (if present) */}
+                  
                   {(() => {
                     const { warns, contras } = extractSafety(b || {});
                     if (!warns.length && !contras.length) return null;
@@ -1503,6 +1870,7 @@ function openReasons() {
           {BIOSIMILAR_REASONS.map((r) => (
             <div
               key={r.key || r.id}
+              data-reason={r.key} // ← this allows the scroll helper to find the section
               style={{
                 border: "1px solid #e5e7eb",
                 borderRadius: 12,
@@ -1513,25 +1881,25 @@ function openReasons() {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
                 <div style={{ fontWeight: 600 }}>{r.title}</div>
                 <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const ev = EVIDENCE_MAP[r.key];
-                    alert(ev ? ev.points.join("\n• ") : "Evidence TBD");
-                  }}
-                  style={{
-                    border: "1px solid #334155",
-                    background: "#334155",
-                    color: "#fff",
-                    borderRadius: 999,
-                    padding: "6px 10px",
-                    cursor: "default",
-                    fontSize: 12
-                  }}
-                  title="Evidence"
-                >
-                  Evidence
-                </button>
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // jump straight to the full “all reasons” list and expand THIS reason
+                  openEvidenceFor(r.key);
+                }}
+                style={{
+                  border: "1px solid #334155",
+                  background: "#334155",
+                  color: "#fff",
+                  borderRadius: 999,
+                  padding: "6px 10px",
+                  cursor: "pointer",
+                  fontSize: 12
+                }}
+                title="More evidence"
+              >
+                More evidence
+              </button>
               </div>
 
               {r.blurb && (
@@ -1662,6 +2030,18 @@ function openReasons() {
   </>
 )}
   </Modal>
+)}
+{/* Disease Activity modal */}
+{showDiseaseActivity && (
+  <DiseaseActivity
+    onClose={() => setShowDiseaseActivity(false)}
+    onQuickSelect={(level) => {
+      setActivityLevel(level);
+      setPaContext(prev => ({ ...prev, diseaseActivity: level }));
+      recomputePA("activity-change");
+      setShowDiseaseActivity(false);
+    }}
+  />
 )}
 
    

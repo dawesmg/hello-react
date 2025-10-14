@@ -1,0 +1,113 @@
+[
+  {
+    "id": "ptA",
+    "display": "Patient A — RA, MTX failed (should APPROVE)",
+    "disease": "Rheumatoid arthritis",
+    "diseaseActivity": "moderate",
+    "priorTherapies": [
+      { "name": "Methotrexate", "class": "csDMARD", "outcome": "failed" }
+    ],
+    "concurrentTherapies": [],
+    "labs": {
+      "tuberculosis_screening_date": "2023-08-01",
+      "hepatitis_b_screening_date": "2023-08-01"
+    },
+    "documentation": {},
+    "safetyAttestations": {},
+    "prescriber": { "specialty": "rheumatology" }
+  },
+  {
+    "id": "ptB",
+    "display": "Patient B — Missing HBV date (NEEDS INFO)",
+    "disease": "Rheumatoid arthritis",
+    "diseaseActivity": "moderate",
+    "priorTherapies": [
+      { "name": "Methotrexate", "class": "csDMARD", "outcome": "ongoing" }
+    ],
+    "concurrentTherapies": [],
+    "labs": {
+      "tuberculosis_screening_date": "2023-08-01"
+    },
+    "documentation": {},
+    "safetyAttestations": {},
+    "prescriber": { "specialty": "immunology" }
+  },
+  {
+    "id": "ptC",
+    "display": "Patient C — Low activity (likely PEND)",
+    "disease": "Rheumatoid arthritis",
+    "diseaseActivity": "low",
+    "priorTherapies": [
+      { "name": "Methotrexate", "class": "csDMARD", "outcome": "failed" }
+    ],
+    "concurrentTherapies": [],
+    "labs": {
+      "tuberculosis_screening_date": "2023-08-01",
+      "hepatitis_b_screening_date": "2023-08-01"
+    },
+    "documentation": {},
+    "safetyAttestations": {},
+    "prescriber": { "specialty": "rheumatology" }
+  },
+  {
+    "id": "ptD",
+    "display": "Patient D — Concurrent biologic (NEEDS INFO)",
+    "disease": "Rheumatoid arthritis",
+    "diseaseActivity": "moderate",
+    "priorTherapies": [
+      { "name": "Methotrexate", "class": "csDMARD", "outcome": "failed" }
+    ],
+    "concurrentTherapies": [
+      { "name": "Etanercept", "class": "biologic" }
+    ],
+    "labs": {
+      "tuberculosis_screening_date": "2023-08-01",
+      "hepatitis_b_screening_date": "2023-08-01"
+    },
+    "documentation": {},
+    "safetyAttestations": {},
+    "prescriber": { "specialty": "rheumatology" }
+  },
+  {
+    "id": "ptE",
+    "display": "Patient E — JAK candidate w/ attestations (APPROVE JAK)",
+    "disease": "Rheumatoid arthritis",
+    "diseaseActivity": "moderate",
+    "priorTherapies": [
+      { "name": "Methotrexate", "class": "csDMARD", "outcome": "failed" }
+    ],
+    "concurrentTherapies": [],
+    "labs": {
+      "tuberculosis_screening_date": "2023-08-01",
+      "hepatitis_b_screening_date": "2023-08-01"
+    },
+    "documentation": {
+      "clinical_response_summary": "Improved symptoms; fewer swollen joints at 3 months."
+    },
+    "safetyAttestations": {
+      "cv_risk_discussed": true,
+      "thrombosis_risk_discussed": true,
+      "malignancy_risk_discussed": true
+    },
+    "prescriber": { "specialty": "rheumatology" }
+  },
+  {
+  "id": "patient_f_no_csDMARD",
+  "display": "Patient F — No prior csDMARD",
+  "paContext": {
+    "disease": "Rheumatoid arthritis",
+    "diseaseActivity": "high",
+    "priorTherapies": [
+      { "name": "adalimumab", "class": "biologic", "outcome": "na" }
+    ],
+    "concurrentTherapies": [],
+    "labs": {
+      "tuberculosis_screening_date": "2024-12-10",
+      "hepatitis_b_screening_date": "2024-11-20"
+    },
+    "documentation": {},
+    "safetyAttestations": {},
+    "prescriber": { "specialty": "rheumatology" }
+  }
+}
+]

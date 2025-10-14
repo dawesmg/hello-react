@@ -1,14 +1,145 @@
 {
+  "version": "2025-10-10",
   "payers": [
     {
       "id": "optumrx-like",
-      "name": "OptumRx (Demo)",
+      "label": "OptumRx (simulated)",
       "defaultApprovalMonths": 12,
+      "globalRules": {
+        "prescriberSpecialty": ["rheumatology", "immunology", "internal-medicine-rheum"]
+      },
       "drugs": [
-        { "drugKey": "adalimumab", "aliases": ["humira", "hyrimoz", "adalimumab-adaz"] },
-        { "drugKey": "etanercept", "aliases": ["enbrel"] },
-        { "drugKey": "infliximab", "aliases": ["remicade", "infliximab-dyyb", "infliximab-abda"] }
-      ]
+        {
+          "drugKey": "adalimumab",
+          "aliases": ["Humira", "Hyrimoz", "Idacio", "Amjevita", "Hadlima", "Yusimry"],
+          "coding": {
+            "rxnorm": ["ingredient:Adalimumab"],
+            "ndcHint": true
+          },
+          "indications": ["Rheumatoid arthritis"],
+          "initialAuth": {
+            "criteria": [
+              {
+                "id": "dx.ra.severity",
+                "type": "diagnosis",
+                "field": "diseaseActivity",
+                "allowed": ["moderate", "severe"],
+                "messageOnFail": "Diagnosis must be moderately to severely active RA."
+              },
+              {
+                "id": "step.dmards",
+                "type": "step-therapy",
+                "minTriedFailed": 1,
+                "allowedClasses": ["csDMARD"],
+                "examples": ["methotrexate", "leflunomide", "sulfasalazine"],
+                "messageOnFail": "Requires ≥1 trial & failure/contraindication/intolerance of a csDMARD (e.g., methotrexate)."
+              },
+              {
+                "id": "concurrent.immunomod",
+                "type": "concurrency",
+                "disallowClasses": ["biologic", "JAKi", "targeted-immunomodulator"],
+                "messageOnFail": "Cannot be combined with another targeted immunomodulator."
+              },
+              {
+                "id": "labs.screening",
+                "type": "documentation",
+                "requiredFields": [
+                  "tuberculosis_screening_date",
+                  "hepatitis_b_screening_date"
+                ],
+                "messageOnFail": "Provide TB/HBV screening dates (or attest if contraindicated)."
+              },
+              {
+                "id": "prescriber.specialty",
+                "type": "prescriber",
+                "allowed": ["rheumatology", "immunology", "internal-medicine-rheum"],
+                "messageOnFail": "Prescriber should be rheumatology (or in consultation)."
+              }
+            ],
+            "approveIfAllPass": true
+          },
+          "reauthorization": {
+            "criteria": [
+              {
+                "id": "response.doc",
+                "type": "documentation",
+                "requiredFields": ["clinical_response_summary"],
+                "messageOnFail": "Document positive clinical response (e.g., DAS28/CDAI improvement)."
+              },
+              {
+                "id": "concurrent.immunomod.renew",
+                "type": "concurrency",
+                "disallowClasses": ["biologic", "JAKi", "targeted-immunomodulator"],
+                "messageOnFail": "Do not combine with another targeted immunomodulator."
+              }
+            ],
+            "approveIfAllPass": true
+          }
+        },
+        {
+          "drugKey": "abatacept",
+          "aliases": ["Orencia"],
+          "coding": {
+            "rxnorm": ["ingredient:Abatacept"]
+          },
+          "indications": ["Rheumatoid arthritis"],
+          "initialAuth": {
+            "criteria": [
+              { "ref": "dx.ra.severity" },
+              { "ref": "step.dmards" },
+              { "ref": "concurrent.immunomod" },
+              { "ref": "labs.screening" },
+              { "ref": "prescriber.specialty" }
+            ],
+            "approveIfAllPass": true
+          },
+          "reauthorization": {
+            "criteria": [
+              { "ref": "response.doc" },
+              { "ref": "concurrent.immunomod.renew" }
+            ],
+            "approveIfAllPass": true
+          }
+        },
+        {
+          "drugKey": "upadacitinib",
+          "aliases": ["Rinvoq"],
+          "coding": {
+            "rxnorm": ["ingredient:Upadacitinib"]
+          },
+          "indications": ["Rheumatoid arthritis"],
+          "initialAuth": {
+            "criteria": [
+              { "ref": "dx.ra.severity" },
+              { "ref": "step.dmards" },
+              { "ref": "concurrent.immunomod" },
+              {
+                "id": "boxed.warning.attestations",
+                "type": "documentation",
+                "requiredFields": [
+                  "cv_risk_discussed",
+                  "thrombosis_risk_discussed",
+                  "malignancy_risk_discussed"
+                ],
+                "messageOnFail": "JAK safety attestation required (CV/thrombosis/malignancy)."
+              },
+              { "ref": "prescriber.specialty" }
+            ],
+            "approveIfAllPass": true
+          },
+          "reauthorization": {
+            "criteria": [
+              { "ref": "response.doc" },
+              { "ref": "concurrent.immunomod.renew" }
+            ],
+            "approveIfAllPass": true
+          }
+        }
+      ],
+      "textSnippets": {
+        "step.csDMARD.explainer": "Conventional DMARDs include methotrexate, leflunomide, or sulfasalazine. Typically requires ≥3 months trial at maximally tolerated dose.",
+        "response.examples": "Positive response may include improved DAS28/CDAI, reduced swollen/tender joints, improved function, or clinician attestation."
+      }
     }
   ]
 }
