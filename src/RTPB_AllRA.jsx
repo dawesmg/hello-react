@@ -47,6 +47,8 @@ import { evaluatePA, resolveDrugKey } from "./pa/evaluatePA";
 
 import DEMO_PATIENTS from "./data/demo_patients.json";
 
+import { toggleScreen42 } from "./components/features/s42/screen42Bus"; // adjust path
+
 const RA = "Rheumatoid arthritis";
 const SHOW_INDICATIONS = false; // RA-locked demo
 
@@ -1033,6 +1035,15 @@ return (
     Disease Activity Selection
   </button>
 
+<button
+  onClick={toggleScreen42}
+  style={{ marginLeft: 8, border: "1px solid #e5e7eb", borderRadius: 8, padding: "4px 8px" }}
+  title="Open Screen 42 (debug)"
+>
+  Screen42
+</button>
+
+
   {/* Activity level chip with color */}
   {activityLevel && (
     <span style={activityChipStyle(activityLevel)}>
@@ -1266,20 +1277,7 @@ return (
               </div>
             )}
 
-            {/* Safety pills */}
-            {selection?.originator && (() => {
-              const { warns, contras } = extractSafety(selection.originator);
-              if (!warns.length && !contras.length) return null;
-              return (
-                <div style={{ gridColumn: "1 / -1", marginTop: 8 }}>
-                  <strong>Safety:</strong>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 6 }}>
-                    {warns.map((w) => <Pill key={`w-${w}`} kind="secondary">{w}</Pill>)}
-                    {contras.map((c) => <Pill key={`c-${c}`} kind="danger">{c}</Pill>)}
-                  </div>
-                </div>
-              );
-            })()}
+            
           </div>
 
 {/* Safety pills */}

@@ -1,0 +1,6 @@
+start_date,end_date,class,medication,rxnorm,ndc,dose_mg,route,regimen
+2024-11-01,2025-01-01,NSAID,Naproxen,sim-rxnorm-131,sim-ndc-0001,500,Oral,BID
+2025-01-01,2025-06-01,csDMARD,Methotrexate,sim-rxnorm-469,sim-ndc-0002,15,Oral,Weekly
+2025-02-01,2025-06-01,Folate,Folic acid,sim-rxnorm-838,sim-ndc-0003,1,Oral,OD
+2025-06-01,2025-08-01,bDMARD (TNF),Adalimumab (Humira),sim-rxnorm-199,sim-ndc-0004,40,SC,Q2W
+2025-08-01,2025-10-01,bDMARD (TNF) - biosimilar,Adalimumab-adbm (Cyltezo),sim-rxnorm-200,sim-ndc-0005,40,SC,Q2W

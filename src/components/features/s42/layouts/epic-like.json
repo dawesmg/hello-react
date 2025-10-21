@@ -1,0 +1,12 @@
+{
+  "layoutId": "epic-like",
+  "regions": [
+    { "id": "left-rail", "width": "260px", "widgets": ["patientBanner", "conditions", "allergies"] },
+    { "id": "top-strip", "height": "160px", "widgets": ["metricStrip"] },
+    { "id": "main", "widgets": ["medTimeline", "cdsBanner", "rtpbBox"] },
+    { "id": "right-rail", "width": "340px", "widgets": ["monograph", "notes"] }
+  ],
+  "theme": "epic"
+}
+
+

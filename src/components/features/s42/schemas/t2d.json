@@ -1,0 +1,30 @@
+{
+  "id": "t2d",
+  "name": "Type 2 Diabetes",
+  "metrics": [
+    {
+      "id": "hba1c",
+      "label": "HbA1c",
+      "type": "line",
+      "unit": "%",
+      "source": {
+        "resource": "Observation",
+        "codeSystem": "http://loinc.org",
+        "codes": ["4548-4"],
+        "windowMonths": 12
+      },
+      "bands": [
+        { "label": "Good", "max": 7.0, "colorToken": "severity.low" },
+        { "label": "Needs optimization", "min": 7.0, "max": 9.0, "colorToken": "severity.med" },
+        { "label": "Poor control", "min": 9.0, "colorToken": "severity.high" }
+      ]
+    }
+  ],
+  "medTimeline": {
+    "resource": "MedicationStatement",
+    "groupBy": "category.class",
+    "labelFrom": ["medicationCodeableConcept.text"],
+    "doseFrom": ["dosage.0.text"],
+    "windowMonths": 12
+  }
+}

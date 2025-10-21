@@ -5,8 +5,6 @@ const ENV = (import.meta?.env?.VITE_APP_ENV || "dev").toLowerCase(); // dev | pr
 const STORAGE_KEY = "app.flags.v1";
 
 
-
-
 // Define flags here
 const FLAG_DEFS = {
   adminUi: {
@@ -25,6 +23,28 @@ const FLAG_DEFS = {
   adminConsole: {
   description: "Show Admin Console stub modal (Phase 0.6 placeholder).",
   defaults: { dev: true, preview: false, prod: false },
+},
+
+screen42: {
+  description: "Show Screen 42 (debug modal for RA EMR snapshot)",
+  // ON in dev/preview, OFF in prod by default
+  defaults: { dev: true, preview: true, prod: false },
+},
+ screen42RA: {
+  description: "Screen42: use RA schema + RA demo bundle",
+  defaults: { dev: true,  preview: false, prod: false },
+},
+screen42T2D: {
+  description: "Screen42: use T2D schema + T2D demo bundle",
+  defaults: { dev: false, preview: false, prod: false },
+},
+screen42HTN: {
+  description: "Screen42: use HTN schema + HTN demo bundle",
+  defaults: { dev: false, preview: false, prod: false },
+},
+screen42DEP: {
+  description: "Screen42: use DEP schema + DEP demo bundle",
+  defaults: { dev: false, preview: false, prod: false },
 },
 };
 

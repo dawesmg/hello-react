@@ -1,0 +1,34 @@
+{
+  "id": "ra",
+  "name": "Rheumatoid Arthritis",
+  "metrics": [
+    {
+      "id": "das28",
+      "label": "DAS28",
+      "type": "line",
+      "unit": "score",
+      "source": {
+        "resource": "Observation",
+        "codeSystem": "http://loinc.org",
+        "codes": [],
+        "methodCodeSystem": "http://snomed.info/sct",
+        "methodCode": "702660003",
+        "windowMonths": 12
+      },
+      "bands": [
+        { "label": "Low", "max": 3.19, "colorToken": "severity.low" },
+        { "label": "Moderate", "min": 3.2, "max": 5.0, "colorToken": "severity.med" },
+        { "label": "High", "min": 5.1, "colorToken": "severity.high" }
+      ]
+    }
+  ],
+  "medTimeline": {
+    "resource": "MedicationStatement",
+    "groupBy": "category.class",
+    "labelFrom": ["medicationReference.display", "medicationCodeableConcept.text"],
+    "doseFrom": ["dosage.0.text"],
+    "windowMonths": 12
+  },
+  "cds": { "engine": "rules-v1", "rulesetId": "ra-2025-q1", "inputs": ["metrics.das28", "medTimeline"] },
+  "rtpb": { "enabled": true }
+}
