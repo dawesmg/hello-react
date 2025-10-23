@@ -442,108 +442,139 @@ function TimelineRow({ label, items }: { label: string; items: Med[] }) {
 }
 
 // ------------------- main exports -------------------
+
 export function Screen42Launcher({ fetchUrl }: { fetchUrl?: string }) {
-  
+  // 1) Which disease to show first (flags decide initial state)
   const [disease, setDisease] = useState<"RA" | "T2D" | "HTN" | "DEP">(
-  safeGetFlag("screen42T2D")
-    ? "T2D"
-    : safeGetFlag("screen42HTN")
-    ? "HTN"
-    : safeGetFlag("screen42DEP")
-    ? "DEP"
-    : "RA"
-);
-
-
-useEffect(() => {
-  const onOpen = () => setOpen(true);
-  const onClose = () => setOpen(false);
-  const onToggle = () => setOpen((x) => !x);
-
-  window.addEventListener(SCREEN42_EVENTS.OPEN, onOpen as EventListener);
-  window.addEventListener(SCREEN42_EVENTS.CLOSE, onClose as EventListener);
-  window.addEventListener(SCREEN42_EVENTS.TOGGLE, onToggle as EventListener);
-
-  return () => {
-    window.removeEventListener(SCREEN42_EVENTS.OPEN, onOpen as EventListener);
-    window.removeEventListener(SCREEN42_EVENTS.CLOSE, onClose as EventListener);
-    window.removeEventListener(SCREEN42_EVENTS.TOGGLE, onToggle as EventListener);
-  };
-}, []);
-useEffect(() => {
-  const off = safeOnFlagChange((name: string) => {
-    if (["screen42RA","screen42T2D","screen42HTN","screen42DEP"].includes(name)) {
-      if (safeGetFlag("screen42T2D")) setDisease("T2D");
-      else if (safeGetFlag("screen42HTN")) setDisease("HTN");
-      else if (safeGetFlag("screen42DEP")) setDisease("DEP");
-      else setDisease("RA");
-    }
-  });
-  return off;
-}, []);
-  
-  const [open, setOpen] = useState(false);
-  const data: Screen42Data = { months, das28Series, meds }; // using inline data; hook can be added later
-
-  const banded = useMemo(
-    () => data.months.map((label, i) => ({ label, score: data.das28Series[i], band: bandFor(data.das28Series[i]) })),
-    [data]
+    safeGetFlag("screen42T2D")
+      ? "T2D"
+      : safeGetFlag("screen42HTN")
+      ? "HTN"
+      : safeGetFlag("screen42DEP")
+      ? "DEP"
+      : "RA"
   );
 
-  // group meds by class
-  const grouped = useMemo(() => {
-    const m = new Map<string, Med[]>();
-    data.meds.forEach((x) => {
-      if (!m.has(x.class)) m.set(x.class, []);
-      m.get(x.class)!.push(x);
+  // 2) Modal open/close state
+  const [open, setOpen] = useState(false);
+
+  // 3) Optional: remote bundle from fetch (if you decide to use fetchUrl later)
+  const [bundleFromServer, setBundleFromServer] = useState<any | null>(null);
+
+  // 4) React to flag changes (keeps disease in sync with Admin Flags)
+  useEffect(() => {
+    const off = safeOnFlagChange((name: string) => {
+      if (name === "screen42RA" || name === "screen42T2D" || name === "screen42HTN" || name === "screen42DEP") {
+        setDisease(
+          safeGetFlag("screen42T2D")
+            ? "T2D"
+            : safeGetFlag("screen42HTN")
+            ? "HTN"
+            : safeGetFlag("screen42DEP")
+            ? "DEP"
+            : "RA"
+        );
+      }
     });
-    return Array.from(m.entries());
-  }, [data]);
+    return off;
+  }, []);
 
-const schema =
-  disease === "T2D" ? T2D_SCHEMA :
-  disease === "HTN" ? HTN_SCHEMA :
-  disease === "DEP" ? DEP_SCHEMA :
-  RA_SCHEMA;
+  // 5) 🔊 Event-bus listener (so external buttons can open/close/toggle)
+  useEffect(() => {
+    const onOpen   = () => setOpen(true);
+    const onClose  = () => setOpen(false);
+    const onToggle = () => setOpen((x) => !x);
 
-const bundle =
-  disease === "T2D" ? buildT2DBundle() :
-  disease === "HTN" ? buildHTNBundle() :
-  disease === "DEP" ? buildDEPBundle() :
-  buildRABundle();
-  
+    // debug marker so you can confirm mount in prod
+    (window as any).__screen42Ready = true;
+    console.log("[Screen42] listener active");
 
+    window.addEventListener("screen42:open", onOpen);
+    window.addEventListener("screen42:close", onClose);
+    window.addEventListener("screen42:toggle", onToggle);
+    return () => {
+      window.removeEventListener("screen42:open", onOpen);
+      window.removeEventListener("screen42:close", onClose);
+      window.removeEventListener("screen42:toggle", onToggle);
+    };
+  }, []);
 
+  // 6) ✅ Step #2: Optional fetch guard — never crash if /api/ is missing in prod
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      if (!fetchUrl) return; // nothing to fetch
+      try {
+        const res = await fetch(fetchUrl, { cache: "no-store" });
+        if (!res.ok) throw new Error(`fetch ${res.status}`);
+        const json = await res.json();
+        if (!cancelled) {
+          console.log("[Screen42] fetched remote bundle");
+          setBundleFromServer(json);
+        }
+      } catch (e) {
+        console.warn("[Screen42] fetch ignored (likely prod with no API):", e);
+        // IMPORTANT: don't throw — allow component to render with inline demo bundle
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [fetchUrl]);
+
+  // 7) Pick schema + bundle dynamically (inline demo bundle is the safe default)
+  const schema =
+    disease === "T2D" ? T2D_SCHEMA :
+    disease === "HTN" ? HTN_SCHEMA :
+    disease === "DEP" ? DEP_SCHEMA :
+    RA_SCHEMA;
+
+  const bundle =
+    bundleFromServer ? bundleFromServer :
+    disease === "T2D" ? buildT2DBundle() :
+    disease === "HTN" ? buildHTNBundle() :
+    disease === "DEP" ? buildDEPBundle() :
+    buildRABundle();
+
+  // 8) Render
   return (
-  <LocalErrorBoundary>
-    
-   <Modal open={open} onClose={() => setOpen(false)} title="Screen 42 — Prescribing Decision Support">
-  <div style={{ border: "1px solid #e5e7eb", borderRadius: 10, padding: 12 }}>
-    {/* Toggle */}
-    <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-      <button onClick={() => setDisease("RA")}  style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #e5e7eb", background: disease === "RA"  ? "#eef2ff" : "#fff", fontWeight: disease === "RA"  ? 600 : 400 }}>RA</button>
-      <button onClick={() => setDisease("T2D")} style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #e5e7eb", background: disease === "T2D" ? "#eef2ff" : "#fff", fontWeight: disease === "T2D" ? 600 : 400 }}>T2D</button>
-      <button onClick={() => setDisease("HTN")} style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #e5e7eb", background: disease === "HTN" ? "#eef2ff" : "#fff", fontWeight: disease === "HTN" ? 600 : 400 }}>HTN</button>
-      <button onClick={() => setDisease("DEP")} style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid #e5e7eb", background: disease === "DEP" ? "#eef2ff" : "#fff", fontWeight: disease === "DEP" ? 600 : 400 }}>DEP</button>
-    </div>
+    <LocalErrorBoundary>
+      {/* (your launcher UI / debug banner / open button, etc.) */}
 
-    {/* Renderer */}
-    <S42Renderer
-      schema={schema}
-      layout={{
-        layoutId: "epic-like",
-        regions: [
-          { id: "left-rail",  width: "0px", widgets: [] },
-          { id: "top-strip",  height: "160px", widgets: ["metricStrip"] },
-          { id: "main",       widgets: ["medTimeline"] },
-          { id: "right-rail", width: "0px", widgets: [] }
-        ],
-        theme: "epic"
-      }}
-      bundle={bundle}
-    />
-  </div>
-</Modal>
-</LocalErrorBoundary>
-);
+      <Modal open={open} onClose={() => setOpen(false)} title="Screen 42 — Prescribing Decision Support">
+        {/* optional in-modal disease toggle */}
+        <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+          {(["RA","T2D","HTN","DEP"] as const).map((d) => (
+            <button
+              key={d}
+              onClick={() => setDisease(d)}
+              style={{
+                padding: "6px 10px",
+                borderRadius: 8,
+                border: "1px solid #e5e7eb",
+                background: disease === d ? "#eef2ff" : "#fff",
+                fontWeight: disease === d ? 600 : 400,
+              }}
+            >
+              {d}
+            </button>
+          ))}
+        </div>
+
+        {/* schema-driven renderer */}
+        <S42Renderer
+          schema={schema}
+          layout={{
+            layoutId: "epic-like",
+            regions: [
+              { id: "left-rail",  width: "0px", widgets: [] },
+              { id: "top-strip",  height: "160px", widgets: ["metricStrip"] },
+              { id: "main",       widgets: ["medTimeline"] },
+              { id: "right-rail", width: "0px", widgets: [] },
+            ],
+            theme: "epic",
+          }}
+          bundle={bundle}
+        />
+      </Modal>
+    </LocalErrorBoundary>
+  );
 }

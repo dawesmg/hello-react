@@ -4,12 +4,15 @@ import RTPB_AllRA from "./RTPB_AllRA";
 import { getFlag, onFlagChange } from "./flags";
 import ErrorBoundary from "./ErrorBoundary.jsx";
 import { logError } from "./logging";
-
 import { Screen42Launcher } from "./components/Screen42";
 
 // Lazy-loaded modals
 const AdminFlags = lazy(() => import("./AdminFlags.jsx"));
 const AdminStub  = lazy(() => import("./AdminStub.jsx")); // Phase 0.6 stub console
+
+
+<Screen42Launcher /* fetchUrl={undefined} */ />
+
 
 {getFlag("diseaseActivity") && (
   <button
@@ -152,9 +155,7 @@ export default function App() {
               Console
             </button>
           )}
-          {getFlag("screen42") && (
-            <Screen42Launcher fetchUrl="/api/sandbox/PRISM_FHIR_Bundle_42_demo.json" />
-          )}
+        
 
         </div>
       </header>
@@ -212,6 +213,7 @@ export default function App() {
       </Suspense>
 
       {/* Environment badge */}
+     <Screen42Launcher />   {/* ← always mounted; no fetchUrl to avoid 404 on GitHub Pages */}
       <EnvBadge />
     </div>
   );
